@@ -7,12 +7,11 @@
 @Html.ActionLink("Journal Coffee", "Create", "Coffees") |
 @Html.ActionLink("Journal Beer", "Create", "Beers")
 
-<h2>Your Connoisseur Info</h2>
+<h2>@User.Identity.Name's Connoisseur Info</h2>
 
 <!-- Author profile summary -->
 <div class="row panel">
     <div class="col-md-4 col-sm-12">
-        @Html.DisplayFor(model => model.FirstName) <br/>
         @Html.DisplayFor(model => model.Username) <br/>
         @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) <br/>
         Connoisseur Since: @Html.DisplayFor(model => model.DateCreated)

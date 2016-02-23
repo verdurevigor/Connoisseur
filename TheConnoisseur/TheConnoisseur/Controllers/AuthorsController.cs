@@ -10,6 +10,8 @@ using TheConnoisseur.Models;
 
 namespace TheConnoisseur.Controllers
 {
+    // This private controller inherits from AppController to gain access to
+    // the current user.
     public class AuthorsController : Controller
     {
         private TheConnoisseurContext db = new TheConnoisseurContext();

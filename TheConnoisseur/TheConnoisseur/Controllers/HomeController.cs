@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace TheConnoisseur.Controllers
 {
+    // Public facing views do not need to have access to the currently logged in User
+    // Therefore, the controller inherits from Controller
     public class HomeController : Controller
     {
         public ActionResult Index()

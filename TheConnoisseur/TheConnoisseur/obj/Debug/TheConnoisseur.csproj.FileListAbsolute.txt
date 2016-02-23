@@ -1,4 +1,3 @@
-C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\obj\Debug\TheConnoisseur.csprojResolveAssemblyReference.cache
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\TheConnoisseur.dll.config
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\TheConnoisseur.dll
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\TheConnoisseur.pdb
@@ -27,3 +26,12 @@ C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\We
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Antlr3.Runtime.pdb
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Newtonsoft.Json.xml
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\System.Web.Optimization.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Security.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Owin.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Security.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Security.Cookies.xml

@@ -7,7 +7,9 @@ using TheConnoisseur.Models;
 
 namespace TheConnoisseur.Controllers
 {
-    public class AdminController : Controller
+    // This private controller inherits from AppController to gain access to
+    // the current user.
+    public class AdminController : AppController
     {
         // Instance of database context to use in queries
         private TheConnoisseurContext db = new TheConnoisseurContext();

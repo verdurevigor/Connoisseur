@@ -169,12 +169,16 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Auth\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Controllers\CoffeesController.cs" />
@@ -183,6 +187,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\AppViewPage.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Beer.cs" />
     <Compile Include="Models\BeerViewModel.cs" />
@@ -191,6 +197,7 @@
     <Compile Include="Models\Friendship.cs" />
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\JournalListsViewModel.cs" />
+    <Compile Include="Models\LogInViewModel.cs" />
     <Compile Include="Models\PrivacyType.cs" />
     <Compile Include="Models\TheConnoisseurContext.cs" />
     <Compile Include="Models\TheConnoisseurDbInitializer.cs" />
@@ -209,6 +216,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\App\" />
+    <Folder Include="Views\Author\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
