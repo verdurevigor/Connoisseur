@@ -1,0 +1,28 @@
+﻿@*
+@model TheConnoisseur.Models.JournalListsViewModel
+*@
+
+@{
+    ViewBag.Title = "Lists";
+}
+
+<h2>Lists</h2>
+
+<p>Each type of list for the JournalListsViewModel will be parsed into the partial views.</p>
+
+
+@*
+
+@Html.Partial("BeerListPartialView", Model)
+
+<hr />
+
+@Html.Partial("CoffeeListPartialView", Model)
+*@
+
+
+@Html.Partial("../Beers/BeerListPartialView")
+
+<hr />
+
+@Html.Partial("../Coffees/CoffeeListPartialView")

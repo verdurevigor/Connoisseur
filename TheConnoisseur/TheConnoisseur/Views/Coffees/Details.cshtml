@@ -1,0 +1,35 @@
+﻿@model TheConnoisseur.Models.CoffeeViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<h4>Coffee</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+            @Html.DisplayNameFor(model => model.Author.Username): @Html.DisplayFor(model => model.Author.Username)<br />
+            @Html.DisplayNameFor(model => model.Journal.Title): @Html.DisplayFor(model => model.Journal.Title)<br />
+            @Html.DisplayNameFor(model => model.Journal.Maker): @Html.DisplayFor(model => model.Journal.Maker)<br />
+            @Html.DisplayNameFor(model => model.Journal.Rating): @Html.DisplayFor(model => model.Journal.Rating)
+     </div>
+     <div class="col-md-4">
+            @Html.DisplayNameFor(model => model.Journal.Date): @Html.DisplayFor(model => model.Journal.Date)<br />
+            @Html.DisplayNameFor(model => model.Coffee.RoastType): @Html.DisplayFor(model => model.Coffee.RoastType)<br />
+            @Html.DisplayNameFor(model => model.Coffee.Origin): @Html.DisplayFor(model => model.Coffee.Origin)<br />
+            @Html.DisplayNameFor(model => model.Coffee.FoodPairing): @Html.DisplayFor(model => model.Coffee.FoodPairing)
+    </div>
+    <div class="col-md-4">
+        @Html.DisplayNameFor(model => model.Journal.Description):<br />
+        @Html.DisplayFor(model => model.Journal.Description)
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Journal.JournalID }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Journal.JournalID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
