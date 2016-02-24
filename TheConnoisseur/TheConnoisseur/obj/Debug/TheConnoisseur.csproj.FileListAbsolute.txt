@@ -35,3 +35,4 @@ C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Mi
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Security.xml
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\obj\Debug\TheConnoisseur.csprojResolveAssemblyReference.cache

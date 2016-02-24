@@ -4,8 +4,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using TheConnoisseur.Models;
 
-namespace TheConnoisseur.Models
+namespace TheConnoisseur
 {
     public abstract class AppViewPage<TModel> : WebViewPage<TModel>
     {
