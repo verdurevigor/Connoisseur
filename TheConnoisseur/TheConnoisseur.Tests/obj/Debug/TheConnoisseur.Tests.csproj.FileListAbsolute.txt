@@ -31,3 +31,9 @@ C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Microsoft.Owin.Security.xml
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Microsoft.Owin.xml
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Antlr3.Runtime.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur.Tests\bin\Debug\Antlr3.Runtime.pdb

@@ -1,33 +1,23 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Security.Claims;
 using System.Web;
-using System.Web.Mvc;
 
 namespace TheConnoisseur.Models
 {
-    public class AppUser : ClaimsPrincipal
+    // Use this class to store addtional information about the users/authors
+    public class AppUser : IdentityUser
     {
-        public AppUser(ClaimsPrincipal principal)
-            : base(principal)
-        {
-        }
+        // TODO: this property is from the blog example, remove it once complete with blog Identity
+        public string Country { get; set; }
 
-        public string Name
-        {
-            get
-            {
-                return this.FindFirst(ClaimTypes.Name).Value;
-            }
-        }
-
-        public string Country
-        {
-            get
-            {
-                return this.FindFirst(ClaimTypes.Country).Value;
-            }
-        }
+        // TODO: testing to add Author info here, implement more once it works
+        public virtual string City { get; set; }
+        public virtual string State { get; set; }
+        [Display(Name = "Current Favorite")]
+        public virtual string FavItem { get; set; }
+        public virtual string Tagline { get; set; }
     }
 }

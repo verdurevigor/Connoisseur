@@ -35,4 +35,8 @@ C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Mi
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Security.xml
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\Brody\Documents\GitHub\Connoisseur\TheConnoisseur\TheConnoisseur\obj\Debug\TheConnoisseur.csprojResolveAssemblyReference.cache
