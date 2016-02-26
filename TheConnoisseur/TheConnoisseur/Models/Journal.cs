@@ -8,7 +8,7 @@ namespace TheConnoisseur.Models
     public class Journal
     {
         public virtual int JournalID { get; set; }
-        public virtual int AuthorId { get; set; }
+        public virtual int AuthorID { get; set; }
         public virtual string Maker { get; set; }
         public virtual string Title { get; set; }
         public virtual string JType { get; set; }   // Two char string: co, be

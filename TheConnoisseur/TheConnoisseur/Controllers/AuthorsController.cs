@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,14 +14,17 @@ namespace TheConnoisseur.Controllers
     // the current user.
     public class AuthorsController : Controller
     {
-        private AppDbContext db = new AppDbContext();   // TODO: this might need to be changed back to TheConnoisseurContext
+        private TheConnoisseurContext db = new TheConnoisseurContext();
 
         // GET: Authors
         public ActionResult Index()
         {
-            // Retrieve author information from the currently signed in user.
-            Author author = (from a in db.Users         // TODO: check that this retrieves an author appropriately from the db. If not meddle with the DbContext above.
-                        where a.Id == User.Identity.GetUserId()
+
+            // TODO: Get currently logged in user and pass their author information to the view
+            
+            // Currently testing view with a hard coded author
+            Author author = (from a in db.Authors
+                        where a.AuthorID == 1
                         select a).FirstOrDefault();
             return View(author);
         }
@@ -31,9 +33,8 @@ namespace TheConnoisseur.Controllers
         // GET: Authors/FriendProfile/1
         public ActionResult FriendProfile(int friendID)
         {
-            Author author = (from u in db.Users
-                             join f in db.Friendships on u.Id equals f.AuthorId2
-                             where f. == friendID
+            Author author = (from a in db.Authors
+                             where a.AuthorID == friendID
                              select a).FirstOrDefault();
             // TODO: ensure that author found has "friend" relation with current identity
             return View("Index", author);

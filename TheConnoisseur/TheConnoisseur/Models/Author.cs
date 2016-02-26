@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,12 +6,15 @@ using System.Web;
 
 namespace TheConnoisseur.Models
 {
-    public class Author : IdentityUser
+    public class Author
     {
-    
-        /* Properties already present from AspNetUsers database table (object AppUser):
-           Id, Country, Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumber, PhoneNumberConfirmed
-           TwoFactorEnabled, LockoutEndDateUtc, LockoutEnabled, AccessFailedCount, UserName */
+        public virtual int AuthorID { get; set; }
+        [Display(Name="Username")]
+        public virtual string Username { get; set; }
+        public virtual string Email { get; set; }
+        public virtual string EmailConfirm { get; set; }
+        public virtual string Password { get; set; }
+        public virtual string PasswordConfirm { get; set; }
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
         public virtual string City { get; set; }

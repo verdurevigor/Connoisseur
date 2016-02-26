@@ -7,7 +7,7 @@
 @Html.ActionLink("Journal Coffee", "Create", "Coffees") |
 @Html.ActionLink("Journal Beer", "Create", "Beers")
 
-<h2>@Model.FirstName's Connoisseur Info</h2>
+<h2>@User.Identity.Name's Connoisseur Info</h2>
 
 <!-- Author profile summary -->
 <div class="row panel">
@@ -21,7 +21,7 @@
         @Html.DisplayNameFor(model => model.Tagline): @Html.DisplayFor(model => model.Tagline)
     </div>
     <div class="col-md-4 col-sm-12">
-        <img src="~/Content/Images/smilecup.jpg" />     @* TODO: manage image loading using a viemodel that holds html tag or something? *@
+        <img src="~/Content/Images/smilecup.jpg" />     @* TODO: manage image loading using a viemodel that holds html tag or somethign? *@
     </div>
 </div>
 

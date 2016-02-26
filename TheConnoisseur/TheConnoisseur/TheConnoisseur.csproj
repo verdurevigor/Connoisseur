@@ -195,6 +195,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AppDbContext.cs" />
+    <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\AppUserPricipal.cs" />
     <Compile Include="AppViewPage.cs" />
     <Compile Include="Models\Author.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\LogInViewModel.cs" />
     <Compile Include="Models\PrivacyType.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\TheConnoisseurContext.cs" />
     <Compile Include="Models\TheConnoisseurDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
