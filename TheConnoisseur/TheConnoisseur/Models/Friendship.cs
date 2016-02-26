@@ -7,9 +7,9 @@ namespace TheConnoisseur.Models
 {
     public class Friendship
     {
-        public virtual int FriendshipID { get; set; }
-        public virtual int AuthorID1 { get; set; }
-        public virtual int AuthorID2 { get; set; }
+        public virtual int FriendshipId { get; set; }
+        public virtual string AuthorId1 { get; set; }
+        public virtual string AuthorId2 { get; set; }
         public virtual string Relation { get; set; }
     }
 }
