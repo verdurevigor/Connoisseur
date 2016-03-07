@@ -1,4 +1,4 @@
-﻿@model TheConnoisseur.Models.CoffeeViewModel
+﻿@model TheConnoisseur.Models.Coffee
 
 @{
     ViewBag.Title = "Details";
@@ -11,16 +11,16 @@
 
 <div class="row">
     <div class="col-md-4">
-            @Html.DisplayNameFor(model => model.Author.Username): @Html.DisplayFor(model => model.Author.Username)<br />
+            @Html.DisplayNameFor(model => model.Journal.Author.UserName): @Html.DisplayFor(model => model.Journal.Author.UserName)<br />
             @Html.DisplayNameFor(model => model.Journal.Title): @Html.DisplayFor(model => model.Journal.Title)<br />
             @Html.DisplayNameFor(model => model.Journal.Maker): @Html.DisplayFor(model => model.Journal.Maker)<br />
             @Html.DisplayNameFor(model => model.Journal.Rating): @Html.DisplayFor(model => model.Journal.Rating)
      </div>
      <div class="col-md-4">
             @Html.DisplayNameFor(model => model.Journal.Date): @Html.DisplayFor(model => model.Journal.Date)<br />
-            @Html.DisplayNameFor(model => model.Coffee.RoastType): @Html.DisplayFor(model => model.Coffee.RoastType)<br />
-            @Html.DisplayNameFor(model => model.Coffee.Origin): @Html.DisplayFor(model => model.Coffee.Origin)<br />
-            @Html.DisplayNameFor(model => model.Coffee.FoodPairing): @Html.DisplayFor(model => model.Coffee.FoodPairing)
+            @Html.DisplayNameFor(model => model.RoastType): @Html.DisplayFor(model => model.RoastType)<br />
+            @Html.DisplayNameFor(model => model.Origin): @Html.DisplayFor(model => model.Origin)<br />
+            @Html.DisplayNameFor(model => model.FoodPairing): @Html.DisplayFor(model => model.FoodPairing)
     </div>
     <div class="col-md-4">
         @Html.DisplayNameFor(model => model.Journal.Description):<br />

@@ -6,11 +6,20 @@ using System.Web;
 
 namespace TheConnoisseur.Models
 {
-    public class AppDbContext : IdentityDbContext<AppUser>
+    public class AppDbContext : IdentityDbContext<Author>
     {
-        public AppDbContext()
-            : base("DefaultConnection")
+        public AppDbContext() : base("DefaultConnection")
         {
         }
+
+        public System.Data.Entity.DbSet<TheConnoisseur.Models.Journal> Journals { get; set; }
+
+        public System.Data.Entity.DbSet<TheConnoisseur.Models.Beer> Beers { get; set; }
+
+        public System.Data.Entity.DbSet<TheConnoisseur.Models.Coffee> Coffees { get; set; }
+
+        public System.Data.Entity.DbSet<TheConnoisseur.Models.Privacy> Privacies { get; set; }
+
+        public System.Data.Entity.DbSet<TheConnoisseur.Models.Friendship> Friendships { get; set; }
     }
 }

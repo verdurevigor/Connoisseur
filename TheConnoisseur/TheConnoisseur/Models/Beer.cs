@@ -7,10 +7,10 @@ namespace TheConnoisseur.Models
 {
     public class Beer
     {
-        public virtual int BeerID { get; set; }
-        public virtual int JournalID { get; set; }
-        public virtual decimal Abv { get; set; }
-        public virtual int Ibu { get; set; }
-        public virtual string Seasonal { get; set; }
+        public int BeerID { get; set; }
+        public Journal Journal { get; set; }
+        public decimal Abv { get; set; }
+        public int Ibu { get; set; }
+        public string Seasonal { get; set; }
     }
 }

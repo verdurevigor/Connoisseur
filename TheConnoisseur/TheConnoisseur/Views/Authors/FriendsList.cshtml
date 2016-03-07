@@ -1,0 +1,7 @@
+﻿@model List<TheConnoissur.Models.Author>
+<ul>
+@foreach (var item in Model)
+{
+    <li>@Html.DisplayFor(modelItem => item.UserName)</li>
+}
+</ul>

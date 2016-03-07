@@ -7,10 +7,10 @@ namespace TheConnoisseur.Models
 {
     public class Coffee
     {
-        public virtual int CoffeeID { get; set; }
-        public virtual int JournalID { get; set; }
-        public virtual string RoastType { get; set; }
-        public virtual string Origin { get; set; }
-        public virtual string FoodPairing { get; set; }
+        public int CoffeeID { get; set; }
+        public Journal Journal { get; set; }
+        public string RoastType { get; set; }
+        public string Origin { get; set; }
+        public string FoodPairing { get; set; }
     }
 }

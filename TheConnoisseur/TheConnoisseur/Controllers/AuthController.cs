@@ -15,14 +15,14 @@ namespace TheConnoisseur.Controllers
     [AllowAnonymous]
     public class AuthController : Controller
     {
-        private readonly UserManager<AppUser> userManager;
+        private readonly UserManager<Author> userManager;
 
         public AuthController()
             : this(Startup.UserManagerFactory.Invoke())
         {
         }
 
-        public AuthController(UserManager<AppUser> userManager)
+        public AuthController(UserManager<Author> userManager)
         {
             this.userManager = userManager;
         }
@@ -88,11 +88,13 @@ namespace TheConnoisseur.Controllers
                 return View();
             }
 
-            var user = new AppUser
+            var user = new Author
             {
-                UserName = model.Email,
+                Email = model.Email,
+                UserName = model.UserName,
                 State = model.State,
-                City = model.City
+                City = model.City,
+                PrivacyType = model.PrivacyType
             };
 
             var result = userManager.Create(user, model.Password);
@@ -114,7 +116,7 @@ namespace TheConnoisseur.Controllers
             return View();
         }
 
-        private void SignIn(AppUser user)
+        private void SignIn(Author user)
         {
             var identity = userManager.CreateIdentity(
             user, DefaultAuthenticationTypes.ApplicationCookie);
@@ -133,7 +135,6 @@ namespace TheConnoisseur.Controllers
             return returnUrl;
         }
 
-        // TODO: if references remain at zero after full Identity implementation remove this method
         private IAuthenticationManager GetAuthenticationManager()
         {
             var ctx = Request.GetOwinContext();

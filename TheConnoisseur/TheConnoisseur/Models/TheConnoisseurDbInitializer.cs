@@ -7,6 +7,7 @@ namespace TheConnoisseur.Models
 {
     public class TheConnoisseurDbInitializer : System.Data.Entity.DropCreateDatabaseAlways<TheConnoisseurContext>
     {
+        /*
         protected override void Seed(TheConnoisseurContext context)
         {
             Author a1 = new Author()
@@ -88,5 +89,6 @@ namespace TheConnoisseur.Models
 
             base.Seed(context);
         }
+         * */
     }
 }

@@ -8,7 +8,7 @@ using TheConnoisseur.Models;
 
 namespace TheConnoisseur.Controllers
 {
-    // This class provides access to AppUser
+    // This class provides access to Identity Claims for the currently signed in Author
     public abstract class AppController : Controller
     {
         public AppUserPrincipal CurrentUser

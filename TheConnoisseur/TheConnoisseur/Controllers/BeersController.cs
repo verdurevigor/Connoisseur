@@ -7,12 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TheConnoisseur.Models;
+using Microsoft.AspNet.Identity;
 
 namespace TheConnoisseur.Controllers
 {
     public class BeersController : Controller
     {
-        private TheConnoisseurContext db = new TheConnoisseurContext();
+        private AppDbContext db = new AppDbContext();
 
         // GET: Beers
         public ActionResult Index()

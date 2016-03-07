@@ -35,7 +35,7 @@ namespace TheConnoisseur.Controllers
                 // Get journals that match the searchTerm
                 var beers = (from j in db.Journals
                              where j.Description.Contains(searchTerm)
-                             && j.JType == searchType
+                             && j.JType == 1
                              select j).ToList();
                 // Return searchTerm to display to user.
                 ViewBag.SearchTerm = searchTerm;
@@ -45,7 +45,7 @@ namespace TheConnoisseur.Controllers
             {
                 var coffees = (from j in db.Journals
                                where j.Description.Contains(searchTerm)
-                               && j.JType == searchType
+                               && j.JType == 2
                                select j).ToList();
                 ViewBag.SearchTerm = searchTerm;
                 return View("Search", coffees);
@@ -53,7 +53,7 @@ namespace TheConnoisseur.Controllers
             else if (searchType == "author")
             {
                 var authors = (from m in db.Authors
-                               where m.Username == searchTerm || m.FirstName == searchTerm
+                               where m.UserName == searchTerm || m.FirstName == searchTerm
                                select m).ToList();
                 ViewBag.SearchTerm = searchTerm;
                 return View("Search", authors);

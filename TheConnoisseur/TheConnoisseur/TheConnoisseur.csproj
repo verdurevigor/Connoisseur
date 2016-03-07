@@ -153,15 +153,13 @@
     <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Authors\FriendViewModel.cshtml" />
+    <Content Include="Views\Authors\FriendsList.cshtml" />
     <Content Include="Views\Authors\Index.cshtml" />
-    <Content Include="Views\Beers\BeerListPartialView.cshtml" />
     <Content Include="Views\Beers\Create.cshtml" />
     <Content Include="Views\Beers\Delete.cshtml" />
     <Content Include="Views\Beers\Details.cshtml" />
     <Content Include="Views\Beers\Edit.cshtml" />
     <Content Include="Views\Beers\Index.cshtml" />
-    <Content Include="Views\Coffees\CoffeeListPartialView.cshtml" />
     <Content Include="Views\Coffees\Create.cshtml" />
     <Content Include="Views\Coffees\Delete.cshtml" />
     <Content Include="Views\Coffees\Details.cshtml" />
@@ -169,8 +167,6 @@
     <Content Include="Views\Coffees\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Maps.cshtml" />
-    <Content Include="Views\Journals\Lists.cshtml" />
-    <Content Include="Views\Journals\Search.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -178,7 +174,7 @@
     <Content Include="Views\Auth\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppUserClaimsIdentityFactory.cs" />
+    <Compile Include="AuthorClaimsIdentityFactory.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -195,17 +191,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AppDbContext.cs" />
-    <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\AppUserPricipal.cs" />
     <Compile Include="AppViewPage.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Beer.cs" />
-    <Compile Include="Models\BeerViewModel.cs" />
     <Compile Include="Models\Coffee.cs" />
-    <Compile Include="Models\CoffeeViewModel.cs" />
     <Compile Include="Models\Friendship.cs" />
     <Compile Include="Models\Journal.cs" />
-    <Compile Include="Models\JournalListsViewModel.cs" />
     <Compile Include="Models\LogInViewModel.cs" />
     <Compile Include="Models\PrivacyType.cs" />
     <Compile Include="Models\RegisterModel.cs" />
@@ -218,6 +210,9 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Authors\PrivateProfile.cshtml" />
+    <Content Include="Views\Authors\BeersList.cshtml" />
+    <Content Include="Views\Authors\CoffeesList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,7 +223,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\App\" />
-    <Folder Include="Views\Author\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

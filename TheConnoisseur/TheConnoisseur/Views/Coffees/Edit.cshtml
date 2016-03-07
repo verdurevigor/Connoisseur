@@ -1,4 +1,4 @@
-﻿@model TheConnoisseur.Models.CoffeeViewModel
+﻿@model TheConnoisseur.Models.Coffee
 
 @{
     ViewBag.Title = "Edit";
@@ -58,25 +58,25 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Coffee.RoastType, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RoastType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Coffee.RoastType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.RoastType, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Coffee.RoastType, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Coffee.Origin, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Coffee.Origin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Coffee.Origin, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Coffee.FoodPairing, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FoodPairing, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Coffee.FoodPairing, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FoodPairing, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Coffee.FoodPairing, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -11,21 +11,10 @@
     <h4>Coffee</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.JournalID)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.JournalID)
-        </dd>
+        @Html.HiddenFor(model => model.Journal.JournalID)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CoffeeID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CoffeeID)
-        </dd>
+        @Html.HiddenFor(model => model.CoffeeID)
 
         <dt>
             @Html.DisplayNameFor(model => model.RoastType)

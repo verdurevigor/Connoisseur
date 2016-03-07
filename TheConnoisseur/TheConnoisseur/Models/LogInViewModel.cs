@@ -17,7 +17,7 @@ namespace TheConnoisseur.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [HiddenInput(DisplayValue=false)]   // Parameter required to not show value
+        [HiddenInput(DisplayValue=false)]   // Parameter required so as to not display value
         public string ReturnUrl { get; set; }
     }
 }

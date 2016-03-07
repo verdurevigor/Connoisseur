@@ -22,6 +22,7 @@ namespace TheConnoisseur.Models
             }
         }
 
+        // TODO: Once identity is configured, replace the Country claim with an Age claim - this will contstrict minors from viewing alcohol-based content
         public string Country
         {
             get
