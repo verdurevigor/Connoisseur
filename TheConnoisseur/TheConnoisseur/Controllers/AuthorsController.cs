@@ -31,6 +31,11 @@ namespace TheConnoisseur.Controllers
             var friend = (from a in db.Users
                             where a.Id == friendID
                             select a).FirstOrDefault();
+            // User arrived with invalid parameter
+            if (friend == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             // Public profile
             if (friend.PrivacyType == 1)
             {
@@ -41,8 +46,8 @@ namespace TheConnoisseur.Controllers
             var you = db.Users.Find(User.Identity.GetUserId());
 
             var relationship = (from f in db.Friendships
-                            where f.AuthorID1 == you.Id
-                            && f.AuthorID2 == friend.Id
+                            where f.AuthorID1 == friend.Id
+                            && f.AuthorID2 == you.Id
                             select f.Relation).FirstOrDefault();
 
             if (relationship == true)
@@ -54,32 +59,38 @@ namespace TheConnoisseur.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult FriendsList()
+        public ActionResult FriendsList(string authorId)
         {
-            // TODO: take 5 friends at most
+            // TODO: Ensure Take(5) functions properly
             var friends = (from a in db.Users
                            join f in db.Friendships on a.Id equals f.AuthorID1
-                           where f.Relation == true
-                           select a).ToList();
-
+                           where f.AuthorID2 == authorId && f.Relation == true 
+                           select a).Take(5).ToList();
+            
             return PartialView(friends);
         }
 
         [ChildActionOnly]
-        public ActionResult BeerList(string authorId)
+        public ActionResult BeersList(string authorId)
         {
             // Grab three most recent beer journals with authorId
-            var beers = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == authorId).OrderBy(b => b.Journal.Date).Take(3);
-
+            var beers = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == authorId).OrderBy(b => b.Journal.Date).Take(3).ToList();
+            
+            // Shorten the description for brief viewing
+            // TODO: Check the display length of 200 characters and possibly increase it.
+            foreach (Beer b in beers)
+            {
+                b.Journal.Description = b.Journal.Description.Substring(0, 200) + "...";
+            }
             return PartialView(beers);
         }
 
         [ChildActionOnly]
-        public ActionResult CoffeeList(string authorId)
+        public ActionResult CoffeesList(string authorId)
         {
             // Grab three most recent coffee journals with authorId
-            var coffees = db.Coffees.Include("Journal").Where(b => b.Journal.Author.Id == authorId).OrderBy(b => b.Journal.Date).Take(3);
-
+            var coffees = db.Coffees.Include("Journal").Where(b => b.Journal.Author.Id == authorId).OrderBy(b => b.Journal.Date).Take(3).ToList();
+            // TODO: Implement Journal.Description shortening
             return PartialView(coffees);
         }
 

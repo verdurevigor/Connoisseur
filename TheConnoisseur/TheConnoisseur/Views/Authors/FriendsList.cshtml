@@ -1,7 +1,9 @@
-﻿@model List<TheConnoissur.Models.Author>
+﻿@model List<TheConnoisseur.Models.Author>
+
 <ul>
+
 @foreach (var item in Model)
 {
-    <li>@Html.DisplayFor(modelItem => item.UserName)</li>
+    <li>@Html.ActionLink(item.UserName, "FriendProfile", new { friendID = item.Id })</li>
 }
 </ul>

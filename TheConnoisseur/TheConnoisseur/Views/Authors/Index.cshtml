@@ -7,7 +7,7 @@
 @Html.ActionLink("Journal Coffee", "Create", "Coffees") |
 @Html.ActionLink("Journal Beer", "Create", "Beers")
 
-<h2>@User.Identity.Name's Connoisseur Info</h2>
+<h2>Connoisseur Info</h2>
 
 <!-- Author profile summary -->
 <div class="row panel">
@@ -27,14 +27,14 @@
 
 <hr />
 
-@Html.Action("FriendsList")
+@Html.Action("FriendsList", new { authorId = Model.Id })
 
 @* The difference between @Html.Action and @Html.RenderAction is that the later 'Invokes a child action method and renders the result inline in the parent view.'
     while the former 'Invokes a child action method and returns the result as an HTML string.'*@
 <hr />
 
-@Html.Action("BeersList", Model.Id)
+@Html.Action("BeersList", new { authorId = Model.Id })
 
 <hr />
 
-@Html.Action("CoffeesList", Model.Id)
+@Html.Action("CoffeesList", new { authorId = Model.Id })

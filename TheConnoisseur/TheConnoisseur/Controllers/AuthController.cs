@@ -47,19 +47,24 @@ namespace TheConnoisseur.Controllers
             {
                 return View();
             }
-            // Attempt to find the user.
-            var user = userManager.Find(model.Email, model.Password);
+            // Attempt to find the user by email
+            var userByEmail = userManager.FindByEmail(model.Email);
             
-            if (user != null)
+            if (userByEmail != null)
             {
-                // If user exists, create a claims identity for the user that can be passed
-                // to AuthenticationManager. This will include any custom claims that are stored.
-                // Sign in the user using the cookie authentication middleware.
-                SignIn(user);
+                // Sign in with the UserName as userManager so very much only wants.
+                var userActual = userManager.Find(userByEmail.UserName, model.Password);
 
-                return Redirect(GetRedirectUrl(model.ReturnUrl));
+                if (userActual != null)
+                {
+                    // If user exists, create a claims identity for the user that can be passed
+                    // to AuthenticationManager. This will include any custom claims that are stored.
+                    // Sign in the user using the cookie authentication middleware.
+                    SignIn(userActual);
+
+                    return Redirect(GetRedirectUrl(model.ReturnUrl));
+                }
             }
-
             // user authN failed
             ModelState.AddModelError("", "Invalid email or password");
             return View();

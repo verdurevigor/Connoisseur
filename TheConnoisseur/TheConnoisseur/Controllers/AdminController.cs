@@ -12,7 +12,7 @@ namespace TheConnoisseur.Controllers
     public class AdminController : AppController
     {
         // Instance of database context to use in queries
-        private TheConnoisseurContext db = new TheConnoisseurContext();
+        private AppDbContext db = new AppDbContext();
 
         // GET: Admin
         public ActionResult Index()
@@ -52,7 +52,7 @@ namespace TheConnoisseur.Controllers
             }
             else if (searchType == "author")
             {
-                var authors = (from m in db.Authors
+                var authors = (from m in db.Users
                                where m.UserName == searchTerm || m.FirstName == searchTerm
                                select m).ToList();
                 ViewBag.SearchTerm = searchTerm;

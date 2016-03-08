@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TheConnoisseur.Models
 {
-    public class TheConnoisseurDbInitializer : System.Data.Entity.DropCreateDatabaseAlways<TheConnoisseurContext>
+    public class TheConnoisseurDbInitializer : System.Data.Entity.DropCreateDatabaseAlways<AppDbContext>
     {
         /*
         protected override void Seed(TheConnoisseurContext context)

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<TheConnoisseur.Models.Beer>
+
+<table class="table">
+    <thead>Beer Journals</thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.JournalID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.Author.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.Maker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Abv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ibu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Seasonal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.PrivacyType)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.Journal.JournalID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.Author.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.Maker)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Abv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ibu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Seasonal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.PrivacyType)
+        </td>
+    </tr>
+}
+
+</table>

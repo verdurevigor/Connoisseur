@@ -12,40 +12,15 @@ namespace TheConnoisseur.Views
 {
     public class JournalsController : Controller
     {
-        private TheConnoisseurContext db = new TheConnoisseurContext();
+        private AppDbContext db = new AppDbContext();
         
         // All Journal CRUD is done through the specific Journal type's controller
 
         // GET: Journals/Lists
         
         public ActionResult Lists()
-        {/*      TODO: Create simple query to get short (3 items each) of each list type required for jlvm. Ask how to setup an automated query that updates a separate db table once an hour. Or try using List<ViewModelType> in the ListViewModel?
-            JournalListsViewModel jlvm = new JournalListsViewModel()
-            {
-                BeerVMs = (from j in db.Journals
-                           select new BeerViewModel()
-                           {
-                               Journal = j,
-                               Beer = (from b in db.Beers
-                                          where b.JournalID == j.JournalID
-                                          select b).FirstOrDefault(),
-                               Author = (from a in db.Authors
-                                         where a.AuthorID == j.AuthorID
-                                         select a).FirstOrDefault()
-                           }).ToList(),
-
-                CoffeeVMs = (from j in db.Journals
-                             select new CoffeeViewModel() 
-                             { 
-                                 Journal = j,
-                                 Coffee = (from c in db.Coffees
-                                           where c.JournalID == j.JournalID
-                                           select c).FirstOrDefault(),
-                                 Author = (from a in db.Authors
-                                          where a.AuthorID == j.AuthorID
-                                          select a).FirstOrDefault()
-                             }).ToList()
-            };*/
+        {
+            // TODO: query database for a short list of jounals
             return View();
         }
 
