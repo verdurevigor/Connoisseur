@@ -1,0 +1,11 @@
+﻿@model TheConnoisseur.Models.Author
+
+@{
+    ViewBag.Title = "New Friends?";
+}
+
+<h2>Private Profile</h2>
+
+<p>You must add @Model.UserName as a friend in order to see their profile and journals.</p>
+
+@Html.ActionLink("Add as Friend", "AddFriend", "Authors", new { @id = @Model.Id }, new { @class = "btn btn-primary" })

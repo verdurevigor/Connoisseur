@@ -29,8 +29,19 @@
                     <li>@Html.ActionLink("Search", "Search", "Journals")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Login", "LogIn", "Auth")</li>
-                    <li>@Html.ActionLink("Logout", "LogOut", "Auth")</li>
+                    @if (User.Identity.IsAuthenticated == false)
+                    {
+                        <li>@Html.ActionLink("Login", "LogIn", "Auth")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Auth")</li>
+                    }
+                    else
+                    {
+                        if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <li>@Html.ActionLink("Manage", "Index", "Authorization")</li>
+                        }
+                        <li>@Html.ActionLink("Logout", "LogOut", "Auth")</li>
+                    }
                 </ul>
             </div>
         </div>

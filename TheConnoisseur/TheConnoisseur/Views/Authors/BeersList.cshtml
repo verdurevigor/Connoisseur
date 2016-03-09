@@ -1,5 +1,30 @@
 ﻿@model List<TheConnoisseur.Models.Beer>
 
-<p>A few beer journals will be displayed.</p>
 
-<!-- The journal entries shown here should be a brief overview; include the icon, title, maker, rating, and description-->
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left col-sm-6">
+                        <img src="@item.Journal.ImagePath" alt="Beer Icon" />
+                        <br />
+                        @item.Journal.Title
+                        by @item.Journal.Maker
+                    </div>
+                    <div class="pull-left col-sm-6">
+                        <b>Rating:</b> @item.Journal.Rating
+                        <br />
+                        <b>ABV:</b> @item.Abv
+                        <br />
+                        @item.Journal.Description
+                        <br />
+                        @Html.ActionLink("Read", "Details", "Beers", new { @Id = @item.BeerID }, new { @class = "btn btn-default btn-block" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

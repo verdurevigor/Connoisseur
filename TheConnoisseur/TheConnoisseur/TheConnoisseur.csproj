@@ -125,11 +125,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Images\beerbottle.png" />
     <Content Include="Content\Images\beerglass.png" />
     <Content Include="Content\Images\beerlineup.jpg" />
+    <Content Include="Content\Images\beermug.png" />
     <Content Include="Content\Images\hops-banner.png" />
     <Content Include="Content\Images\hops.jpg" />
-    <Content Include="Content\Images\hotmug.png" />
+    <Content Include="Content\Images\coffeemug.png" />
     <Content Include="Content\Images\lovelocalbeer.jpg" />
     <Content Include="Content\Images\newavatar.png" />
     <Content Include="Content\Images\oregoncraftbeer.png" />
@@ -221,6 +223,7 @@
     <Content Include="Views\DataVisibility\Authors.cshtml" />
     <Content Include="Views\DataVisibility\Beers.cshtml" />
     <Content Include="Views\DataVisibility\Coffees.cshtml" />
+    <Content Include="Views\Authors\NotFriendsYet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

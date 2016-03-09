@@ -80,7 +80,8 @@ namespace TheConnoisseur.Controllers
             // TODO: Check the display length of 200 characters and possibly increase it.
             foreach (Beer b in beers)
             {
-                b.Journal.Description = b.Journal.Description.Substring(0, 200) + "...";
+                if (b.Journal.Description.Length > 115)
+                    b.Journal.Description = b.Journal.Description.Substring(0, 115) + "...";
             }
             return PartialView(beers);
         }

@@ -47,15 +47,49 @@ namespace TheConnoisseur.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BeerID,JournalID,Abv,Ibu,Seasonal")] Beer beer)
+        public ActionResult Create([Bind(Include = "BeerID,Journal,Abv,Ibu,Seasonal")] Beer beer, int rating, string glasstype)
         {
             if (ModelState.IsValid)
             {
-                db.Beers.Add(beer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    // Create Jounal and save it to db, then create Beer and save to database!
+                    // Get currently user
+                    Author current = db.Users.Find(User.Identity.GetUserId());
+                    /*
+                    Journal j = new Journal()
+                    {
+                        Author = current,
+                        Date = new DateTime(),
+                        Description = beer.Journal.Description,
+                        ImagePath = "/Content/Images/beer" + glasstype + ".jpg",
+                        JType = 2,
+                        Location = beer.Journal.Location,
+                        Maker = beer.Journal.Maker,
+                        PrivacyType = current.PrivacyType,
+                        Rating = rating,
+                        Title = beer.Journal.Title
+                    };*/
 
+                    // Set input not directly entered on form
+                    beer.Journal.Author = current;
+                    beer.Journal.Date = DateTime.Now;
+                    beer.Journal.ImagePath = "/Content/Images/beer" + glasstype + ".png";
+                    beer.Journal.JType = 2;
+                    beer.Journal.PrivacyType = current.PrivacyType;
+                    beer.Journal.Rating = rating;
+                    // Save data into database
+                    db.Beers.Add(beer);
+                    db.SaveChanges();
+                    // Redirect to user profile
+                    return RedirectToAction("Index", "Authors");
+                }
+                catch
+                {
+                    // Failed to save in database
+                    return View(beer);
+                }
+            }// Invalid model
             return View(beer);
         }
 

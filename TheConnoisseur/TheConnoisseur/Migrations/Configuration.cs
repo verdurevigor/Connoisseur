@@ -20,8 +20,8 @@ namespace TheConnoisseur.Migrations
         protected override void Seed(AppDbContext context)
         {
             // Turn on debugging (be sure to add a breakpoint somewhere in this Seed method)
-            //if (System.Diagnostics.Debugger.IsAttached == false)
-            //    System.Diagnostics.Debugger.Launch();
+            if (System.Diagnostics.Debugger.IsAttached == false)
+                System.Diagnostics.Debugger.Launch();
 
 
             // UserManager is used to add and modify Identities
@@ -138,14 +138,14 @@ namespace TheConnoisseur.Migrations
             {
                 Author = a1,
                 Date = new DateTime(2013, 2, 9, 17, 12, 0),
-                Description = "Delicious single-hop beer. Citrus notes are present and it leaves a slightly astringent aftertaste. Perfect!",
-                ImagePath = "~/Content/Images/beerglass",
+                Description = "Delicious single-hop beer! Citrus notes are present and it leaves a slightly astringent aftertaste. Perfect!",
+                ImagePath = "~/Content/Images/beerglass.png",
                 JType = 2,
                 Location = "Beer Stein",
                 Maker = "Hopworks Urban Brewing",
                 PrivacyType = 1,
                 Rating = 5,
-                Title = "IPX - Simcoe Hop",
+                Title = "IPX - Simcoe Hop"
             };
 
             Beer b1 = new Beer()
@@ -159,14 +159,14 @@ namespace TheConnoisseur.Migrations
             {
                 Author = a1,
                 Date = new DateTime(2013, 2, 15, 12, 20, 0),
-                Description = "Great dark beer that isn't too heavy.",
-                ImagePath = "~/Content/Images/beerglass",
+                Description = "Great dark beer that isn't too heavy, but still delivers",
+                ImagePath = "~/Content/Images/beerglass.png",
                 JType = 2,
                 Location = "Home",
                 Maker = "Deschuttes",
                 PrivacyType = 1,
                 Rating = 4,
-                Title = "Black Butte Porter",
+                Title = "Black Butte Porter"
             };
 
             Beer b2 = new Beer()
@@ -180,14 +180,14 @@ namespace TheConnoisseur.Migrations
             {
                 Author = a1,
                 Date = new DateTime(2013, 2, 16, 7, 12, 0),
-                Description = "Too much of a bright, citrus tone - maybe it would be good made as cold brew.",
-                ImagePath = "~/Content/Images/hotcup",
+                Description = "Too much of a bright, citrus tone; maybe it would be good made as cold brew.",
+                ImagePath = "~/Content/Images/hotcup.png",
                 JType = 1,
                 Location = "Home",
                 Maker = "Wandering Goat",
                 PrivacyType = 1,
                 Rating = 3,
-                Title = "Yirgacheffe",
+                Title = "Yirgacheffe"
             };
 
             Coffee c3 = new Coffee()
@@ -202,14 +202,14 @@ namespace TheConnoisseur.Migrations
             {
                 Author = a3,
                 Date = new DateTime(2013, 2, 20, 7, 12, 0),
-                Description = "Yum! I love the mild bitterness and cocoa undertones",
-                ImagePath = "~/Content/Images/hotcup",
+                Description = "Yum! I love the mild bitterness and the cocoa undertones",
+                ImagePath = "~/Content/Images/hotcup.png",
                 JType = 1,
                 Location = "Sixteen Tons",
                 Maker = "Wandering Goat",
                 PrivacyType = 1,
                 Rating = 3,
-                Title = "Hair of the Goat",
+                Title = "Hair of the Goat"
             };
 
             Coffee c4 = new Coffee()
@@ -223,14 +223,14 @@ namespace TheConnoisseur.Migrations
             {
                 Author = a2,
                 Date = new DateTime(2015, 10, 11, 17, 19, 0),
-                Description = "Fresh harvested spruce tips add a refined Northwest flavor to the refreshing crisp IPA.",
-                ImagePath = "~/Content/Images/beerglass",
+                Description = "Fresh harvested spruce tips add a refined Northwest flavor to the refreshingly crisp IPA.",
+                ImagePath = "~/Content/Images/beerglass.png",
                 JType = 2,
                 Location = "Home",
                 Maker = "My Dad!",
                 PrivacyType = 1,
                 Rating = 3,
-                Title = "Spruce Tips IPA Batch No. 2",
+                Title = "Spruce Tips IPA Batch No. 2"
             };
 
             Beer b5 = new Beer()
@@ -241,7 +241,7 @@ namespace TheConnoisseur.Migrations
             };
 
             // Add the object to database
-            context.Journals.AddOrUpdate(j => j.Description, j1, j2, j3, j4);
+            context.Journals.AddOrUpdate(j => j.Description, j1, j2, j3, j4, j5);
             context.Beers.AddOrUpdate(b => b.Ibu, b1, b2, b5);
             context.Coffees.AddOrUpdate(c => c.Origin, c3, c4);
 
