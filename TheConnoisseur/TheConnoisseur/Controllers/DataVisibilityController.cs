@@ -17,10 +17,6 @@ namespace TheConnoisseur.Controllers
         // GET: DataVisibility
         public ActionResult Index()
         {
-            Beer beer = db.Beers.Include("Journal").Where(b => b.Journal.Maker == "Good Life").FirstOrDefault();
-            db.Journals.Remove(beer.Journal);
-            db.Beers.Remove(beer);
-            db.SaveChanges();
             return View();
         }
 

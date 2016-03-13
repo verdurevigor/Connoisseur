@@ -1,23 +1,20 @@
 ﻿@model TheConnoisseur.Models.Author
 
 @{
-    ViewBag.Title = "Your Profile";
+    ViewBag.Title = Model.UserName +"'s Profile";
 }
-
-@Html.ActionLink("Journal Coffee", "Create", "Coffees") |
-@Html.ActionLink("Journal Beer", "Create", "Beers")
 
 <h2>Connoisseur Info</h2>
 
 <!-- Author profile summary -->
 <div class="row panel">
     <div class="col-md-4 col-sm-12">
-        @Html.DisplayFor(model => model.UserName) <br/>
-        @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) <br/>
+        @Html.DisplayFor(model => model.UserName) <br />
+        @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) <br />
         Connoisseur Since: @Html.DisplayFor(model => model.DateCreated)
     </div>
     <div class="col-md-4 col-sm-12">
-        @Html.DisplayNameFor(model => model.FavItem): @Html.DisplayFor(model => model.FavItem) <br/>
+        @Html.DisplayNameFor(model => model.FavItem): @Html.DisplayFor(model => model.FavItem) <br />
         @Html.DisplayNameFor(model => model.Tagline): @Html.DisplayFor(model => model.Tagline)
     </div>
     <div class="col-md-4 col-sm-12">
@@ -25,16 +22,11 @@
     </div>
 </div>
 
-<hr />
 
 @Html.Action("FriendsList", new { authorId = Model.Id })
 
-@* The difference between @Html.Action and @Html.RenderAction is that the later 'Invokes a child action method and renders the result inline in the parent view.'
-    while the former 'Invokes a child action method and returns the result as an HTML string.'*@
-<hr />
 
 @Html.Action("BeersList", new { authorId = Model.Id })
 
-<hr />
 
 @Html.Action("CoffeesList", new { authorId = Model.Id })

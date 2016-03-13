@@ -15,13 +15,14 @@ namespace TheConnoisseur.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            //AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(AppDbContext context)
         {
             // Turn on debugging (be sure to add a breakpoint somewhere in this Seed method)
-            if (System.Diagnostics.Debugger.IsAttached == false)
-                System.Diagnostics.Debugger.Launch();
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //    System.Diagnostics.Debugger.Launch();
 
 
             // UserManager is used to add and modify Identities
@@ -29,7 +30,8 @@ namespace TheConnoisseur.Migrations
                 new UserStore<Author>(
                     new AppDbContext()));
 
-            /* The Members and Role have been successfully added. Currently the Authors being used in the Journal entries are being pulled from the database explicitly below the commented section.
+            /*
+            // If the Members and Role have been successfully added. Than the Authors being used in the Journal entries should be pulled from the database explicitly below the commented section.
             // Create Authors and add them to database
             Author admin = new Author()
             {
@@ -43,7 +45,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 2,
                 Tagline = "I know what you drank last summer.",
                 UserName = "Admin",
-                AvatarPath = "~/Content/Image/newavatar.png"
+                AvatarPath = "/Content/Image/newavatar.png"
             };
 
             Author a1 = new Author()
@@ -58,7 +60,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 1,
                 Tagline = "Coffee coffee - buzz buzz Buzz!",
                 UserName = "Brodster",
-                AvatarPath = "~/Content/Image/newavatar.png"
+                AvatarPath = "/Content/Image/newavatar.png"
             };
 
             Author a2 = new Author()
@@ -73,7 +75,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 3,
                 Tagline = "Beer + cats are a fun time",
                 UserName = "PhilosophicalDrinker",
-                AvatarPath = "~/Content/Image/newavatar.png"
+                AvatarPath = "/Content/Image/newavatar.png"
             };
 
             Author a3 = new Author()
@@ -88,7 +90,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 1,
                 Tagline = "Summertime is only a pint away.",
                 UserName = "Flowerchild",
-                AvatarPath = "~/Content/Image/newavatar.png"
+                AvatarPath = "/Content/Image/newavatar.png"
             };
 
             
@@ -99,24 +101,25 @@ namespace TheConnoisseur.Migrations
             userManager.Create(a3, "password");
 
             // Get user Ids explicitly to add role to the user
-            string aid = (from u in db.Users
+            string aid = (from u in context.Users
                           where u.UserName == admin.UserName
                           select u.Id).FirstOrDefault();
 
             // Generate Role
-            db.Roles.AddOrUpdate(r => r.Name, new IdentityRole() { Name = "Admin" });
-            db.SaveChanges();
+            context.Roles.AddOrUpdate(r => r.Name, new IdentityRole() { Name = "Admin" });
+            context.SaveChanges();
             // Assign Roles to Authors
             userManager.AddToRole(aid, "Admin");
             context.SaveChanges();                  // TODO: Investigate why context.SaveChanges() is used when db.SaveChanges() and userManager are used here.
             */
-
-            // This section of Author querying is only for use if the Users have been created but the Journal/Friendship has not.
+            
+            // This section of Author querying is only for use if the Users have been created but the Journal or Friendship has not.
             var a1 = (from a in context.Users where a.UserName == "Brodster" select a).FirstOrDefault();
             var a2 = (from a in context.Users where a.UserName == "PhilosophicalDrinker" select a).FirstOrDefault();
             var a3 = (from a in context.Users where a.UserName == "Flowerchild" select a).FirstOrDefault();
-
-            /* Completed
+            
+            /*
+            // Only complete this part once: Completed
             // Only Perform this code block once!
             // Generate friend relationships and one blocked relationship
             Friendship f1a = new Friendship() { AuthorID1 = a1.Id, AuthorID2 = a2.Id, Relation = true };
@@ -132,14 +135,14 @@ namespace TheConnoisseur.Migrations
             SaveChanges(context);
             */
 
-
+            
             // Generate Journals (with Author), then Subtype (coffee, beer) and set the Journal into the Subtype before saving.
             Journal j1 = new Journal()
             {
                 Author = a1,
                 Date = new DateTime(2013, 2, 9, 17, 12, 0),
                 Description = "Delicious single-hop beer! Citrus notes are present and it leaves a slightly astringent aftertaste. Perfect!",
-                ImagePath = "~/Content/Images/beerglass.png",
+                ImagePath = "/Content/Images/beerbottle.png",
                 JType = 2,
                 Location = "Beer Stein",
                 Maker = "Hopworks Urban Brewing",
@@ -152,7 +155,8 @@ namespace TheConnoisseur.Migrations
             {
                 Abv = 6.9m,
                 Ibu = 112,
-                Journal = j1
+                Journal = j1,
+                Style = "IPA"
             };
 
             Journal j2 = new Journal()
@@ -160,7 +164,7 @@ namespace TheConnoisseur.Migrations
                 Author = a1,
                 Date = new DateTime(2013, 2, 15, 12, 20, 0),
                 Description = "Great dark beer that isn't too heavy, but still delivers",
-                ImagePath = "~/Content/Images/beerglass.png",
+                ImagePath = "/Content/Images/beermug.png",
                 JType = 2,
                 Location = "Home",
                 Maker = "Deschuttes",
@@ -173,7 +177,8 @@ namespace TheConnoisseur.Migrations
             {
                 Abv = 5.9m,
                 Ibu = 40,
-                Journal = j2
+                Journal = j2,
+                Style = "Porter"
             };
 
             Journal j3 = new Journal()
@@ -181,7 +186,7 @@ namespace TheConnoisseur.Migrations
                 Author = a1,
                 Date = new DateTime(2013, 2, 16, 7, 12, 0),
                 Description = "Too much of a bright, citrus tone; maybe it would be good made as cold brew.",
-                ImagePath = "~/Content/Images/hotcup.png",
+                ImagePath = "/Content/Images/coffeecup.png",
                 JType = 1,
                 Location = "Home",
                 Maker = "Wandering Goat",
@@ -203,7 +208,7 @@ namespace TheConnoisseur.Migrations
                 Author = a3,
                 Date = new DateTime(2013, 2, 20, 7, 12, 0),
                 Description = "Yum! I love the mild bitterness and the cocoa undertones",
-                ImagePath = "~/Content/Images/hotcup.png",
+                ImagePath = "/Content/Images/coffeecup.png",
                 JType = 1,
                 Location = "Sixteen Tons",
                 Maker = "Wandering Goat",
@@ -224,7 +229,7 @@ namespace TheConnoisseur.Migrations
                 Author = a2,
                 Date = new DateTime(2015, 10, 11, 17, 19, 0),
                 Description = "Fresh harvested spruce tips add a refined Northwest flavor to the refreshingly crisp IPA.",
-                ImagePath = "~/Content/Images/beerglass.png",
+                ImagePath = "/Content/Images/beerglass.png",
                 JType = 2,
                 Location = "Home",
                 Maker = "My Dad!",
@@ -237,7 +242,8 @@ namespace TheConnoisseur.Migrations
             {
                 Abv = 7.2m,
                 Ibu = 97,
-                Journal = j5
+                Journal = j5,
+                Style = "IPA"
             };
 
             // Add the object to database
@@ -245,13 +251,13 @@ namespace TheConnoisseur.Migrations
             context.Beers.AddOrUpdate(b => b.Ibu, b1, b2, b5);
             context.Coffees.AddOrUpdate(c => c.Origin, c3, c4);
 
-            /* Only do this part once: Completed
+            // Only do this part once: 
             // Add definition terms for privacy types
             Privacy p1 = new Privacy() { PrivacyID = 1, Name = "Public" };
             Privacy p2 = new Privacy() { PrivacyID = 2, Name = "Private" };
             Privacy p3 = new Privacy() { PrivacyID = 3, Name = "Friends Only" };
             context.Privacies.AddOrUpdate(p => p.Name, p1, p2, p3);
-             * */
+            
             SaveChanges(context);
         }
 

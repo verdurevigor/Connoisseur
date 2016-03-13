@@ -15,6 +15,11 @@ namespace TheConnoisseur.Controllers
     {
         private AppDbContext db = new AppDbContext();
 
+        public ActionResult PrivateProfile()
+        {
+            return View("PrivateProfile");
+        }
+
         // Author profile page
         // GET: Authors
         public ActionResult Index()
@@ -24,7 +29,6 @@ namespace TheConnoisseur.Controllers
             return View(author);
         }
 
-        // TODO: use this method when a friend's profile link is clicked.
         // GET: Authors/FriendProfile/1
         public ActionResult FriendProfile(string friendID)
         {
@@ -41,21 +45,13 @@ namespace TheConnoisseur.Controllers
             {
                 return View("Index", friend);
             }
-            
             // For non-public profiles, ensure friendship has positive relation
-            var you = db.Users.Find(User.Identity.GetUserId());
-
-            var relationship = (from f in db.Friendships
-                            where f.AuthorID1 == friend.Id
-                            && f.AuthorID2 == you.Id
-                            select f.Relation).FirstOrDefault();
-
-            if (relationship == true)
+            if (CheckFriendship(friend))
             {
                 return View("Index", friend);
             }
-            // Private profile and not friends
-            return View("PrivateProfile");
+            // Not friends
+            return View("NotFriendsYet", friend);
         }
 
         [ChildActionOnly]
@@ -70,6 +66,8 @@ namespace TheConnoisseur.Controllers
             return PartialView(friends);
         }
 
+        // These List controller methods do not need to validate friendship because they are only invokable as a Child Action from
+        // the FriendProfile view - which would not load in the first place if the profile is "friends only" and requester is not a friend
         [ChildActionOnly]
         public ActionResult BeersList(string authorId)
         {
@@ -95,6 +93,13 @@ namespace TheConnoisseur.Controllers
             return PartialView(coffees);
         }
 
+        // TODO: create a nice view and query for all friends of the author
+        public ActionResult AllFriends(string authorId)
+        {
+            // If profile isn't public, validate friendship before querying for their friends
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -102,6 +107,20 @@ namespace TheConnoisseur.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Returns true if friend and currently signed in user are friends
+        private Boolean CheckFriendship(Author friend)
+        {
+            // Check friendship table with currently signed in user and requested user
+            var you = db.Users.Find(User.Identity.GetUserId());
+
+            var relationship = (from f in db.Friendships
+                                where f.AuthorID1 == friend.Id
+                                && f.AuthorID2 == you.Id
+                                select f.Relation).FirstOrDefault();
+            // true = friends, false = not friends
+            return relationship;
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿@model List<TheConnoisseur.Models.Beer>
-
-<hr />
-
-<p>@Html.ActionLink("Read All Beer Entries", "BeerJournals", "Beers", "", new { @class = "btn btn-success" })</p>
+﻿@model IEnumerable<TheConnoisseur.Models.Beer>
 
 <div class="row">
 
@@ -16,6 +12,9 @@
                         <br />
                         @item.Journal.Title
                         by @item.Journal.Maker
+                        <br />
+                        Author: @Html.ActionLink(item.Journal.Author.UserName, "FriendProfile", "Author", new { item.Journal.Author.Id }, new { @class = "" })
+                        @Html.ActionLink(item.Journal.Author.UserName, "FriendProfile", "Author", new { friendID = item.Journal.Author.Id }, new { @class = "" })
                     </div>
                     <div class="pull-left col-sm-6">
                         <b>Rating:</b> @item.Journal.Rating
@@ -24,11 +23,12 @@
                         <br />
                         @item.Journal.Description
                         <br />
-                        @*@Html.ActionLink("Read", "Details", "Beers", new { Id = @item.BeerID }, new { @class = "btn btn-default btn-block" })*@
-                        <a href="@Url.Action("BeerJournals", "Beers")#@item.BeerID" class="btn btn-default btn-block">Read</a>
+                        @Html.ActionLink("Read Full", "FriendBeerJournals", "Beers", new { item.Journal.Author.Id }, new { @class = "btn btn-default btn-block" })
+                        <a href="@Url.Action("FriendBeerJournals", "Beers", new { friendID = item.Journal.Author.Id })#@item.BeerID" class="btn btn-default btn-block">Read Full</a>
                     </div>
                 </div>
             </div>
         </div>
     }
+
 </div>

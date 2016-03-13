@@ -26,7 +26,7 @@
                     <li>@Html.ActionLink("My Blackbook", "Index", "Authors")</li>
                     <li>@Html.ActionLink("The Lists", "Lists", "Journals")</li> @* TODO: add controller action to display best, worst, new etc journal entries. *@
                     <li>@Html.ActionLink("Maps", "Maps", "Home")</li>
-                    <li>@Html.ActionLink("Search", "Search", "Journals")</li>
+                    <li>@Html.ActionLink("Search", "Search", "Search")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated == false)
@@ -66,8 +66,3 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-
-
-
-
-@*    @Html.Partial("_LoginPartial")     *@

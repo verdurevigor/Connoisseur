@@ -156,7 +156,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Authors\FriendsList.cshtml" />
     <Content Include="Views\Authors\Index.cshtml" />
@@ -164,7 +166,7 @@
     <Content Include="Views\Beers\Delete.cshtml" />
     <Content Include="Views\Beers\Details.cshtml" />
     <Content Include="Views\Beers\Edit.cshtml" />
-    <Content Include="Views\Beers\Index.cshtml" />
+    <Content Include="Views\Beers\BeerJournals.cshtml" />
     <Content Include="Views\Coffees\Create.cshtml" />
     <Content Include="Views\Coffees\Delete.cshtml" />
     <Content Include="Views\Coffees\Details.cshtml" />
@@ -193,6 +195,7 @@
     <Compile Include="Controllers\DataVisibilityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JournalsController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,12 +210,14 @@
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\LogInViewModel.cs" />
     <Compile Include="Models\PrivacyType.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\TheConnoisseurDbInitializer.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Auth\Register.cshtml" />
@@ -224,6 +229,12 @@
     <Content Include="Views\DataVisibility\Beers.cshtml" />
     <Content Include="Views\DataVisibility\Coffees.cshtml" />
     <Content Include="Views\Authors\NotFriendsYet.cshtml" />
+    <Content Include="Views\Beers\FriendBeerJournals.cshtml" />
+    <Content Include="Views\Journals\Lists.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Search\ResultBeerOLD.cshtml" />
+    <Content Include="Views\Authors\FriendProfile.cshtml" />
+    <Content Include="Views\Search\ResultBeer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

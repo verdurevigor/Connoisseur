@@ -12,5 +12,6 @@ namespace TheConnoisseur.Models
         public decimal Abv { get; set; }
         public int Ibu { get; set; }
         public string Seasonal { get; set; }
+        public string Style { get; set; }
     }
 }

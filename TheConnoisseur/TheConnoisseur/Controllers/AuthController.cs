@@ -7,7 +7,6 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using TheConnoisseur.Models;
-using TheConnoisseur.ViewModels;
 
 namespace TheConnoisseur.Controllers
 {
@@ -86,7 +85,7 @@ namespace TheConnoisseur.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {

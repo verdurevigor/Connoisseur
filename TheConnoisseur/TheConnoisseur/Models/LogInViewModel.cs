@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TheConnoisseur.ViewModels
+namespace TheConnoisseur.Models
 {
     public class LogInViewModel
     {

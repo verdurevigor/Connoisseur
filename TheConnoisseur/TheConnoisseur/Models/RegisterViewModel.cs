@@ -6,7 +6,7 @@ using System.Web;
 
 namespace TheConnoisseur.Models
 {
-    public class RegisterModel
+    public class RegisterViewModel
     {
         // TODO: Annotate error messages.
         [Required]

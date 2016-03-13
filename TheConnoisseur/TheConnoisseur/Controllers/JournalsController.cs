@@ -21,7 +21,10 @@ namespace TheConnoisseur.Views
         public ActionResult Lists()
         {
             // TODO: query database for a short list of jounals
-            return View();
+            // For now this is used to display all journals and delete them (testing purposes)
+            var journals = db.Journals.ToList();
+
+            return View(journals);
         }
 
         // GET: Journals/Search
