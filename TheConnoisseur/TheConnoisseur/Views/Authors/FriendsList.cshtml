@@ -1,14 +1,12 @@
 ﻿@model List<TheConnoisseur.Models.Author>
 
-<hr />
-
-<p>@Html.ActionLink("View All Connoisseur Friends", "AllFriends", "Authors", "", new { @class = "btn btn-success" })</p>
 
 <ul>
 
 @foreach (var item in Model)
 {
     <li>@Html.ActionLink(item.UserName, "FriendProfile", new { friendID = item.Id })</li>
-    @Html.ActionLink(item.UserName, "FriendProfile", "controller",
 }
 </ul>
+
+<hr />

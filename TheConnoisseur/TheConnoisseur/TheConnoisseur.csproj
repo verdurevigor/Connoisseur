@@ -232,9 +232,10 @@
     <Content Include="Views\Beers\FriendBeerJournals.cshtml" />
     <Content Include="Views\Journals\Lists.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
-    <Content Include="Views\Search\ResultBeerOLD.cshtml" />
     <Content Include="Views\Authors\FriendProfile.cshtml" />
     <Content Include="Views\Search\ResultBeer.cshtml" />
+    <Content Include="Views\Beers\FriendsBeers.cshtml" />
+    <Content Include="Views\Authors\AddAsFriend.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

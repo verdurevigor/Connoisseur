@@ -16,50 +16,64 @@ namespace TheConnoisseur.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: Beers/BeerJournals
-        public ActionResult BeerJournals(string resultMessage)
+        public ActionResult BeerJournals()
         {
             // Get list of all beer journal entries for the currently signed in user
             var you = db.Users.Find(User.Identity.GetUserId());
-
             var beers = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == you.Id).ToList();
-            // Result message from add, delete or edit
-            ViewBag.ResultMessage = resultMessage;
+            
             return View(beers);
         }
         
         // GET: Beers/FriendBeerjournals/FriendId
+        // Returns Author object to FriendBeerJournals page where ChildAction FriendsBeers is fired
         public ActionResult FriendBeerJournals(string friendID)
         {
-            // Ensure query token is valid
             var friend = (from a in db.Users
                           where a.Id == friendID
                           select a).FirstOrDefault();
-            // User arrived with invalid parameter
+            // If user arrived with invalid parameter
             if (friend == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            // In the event the author arrived to link by search page
+            // In the event the author arrived to action of their own journal by search page
             if (friend.Id == User.Identity.GetUserId())
             {
                 string yourId = User.Identity.GetUserId();
                 var beer = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == yourId).ToList();
                 return View("BeerJournals", beer);
             }
-            // If profile is public, gather their beer entries
+            // If profile is public, pass friend along
             if (friend.PrivacyType == 1)
             {
-                var beer = db.Beers.Include("Journal.Author").Where(b => b.Journal.Author.Id == friend.Id).ToList();
-                return View(beer);
+                return View(friend);
             }
             // Not public, check that friendship exists before gather their beer entries
             if (CheckFriendship(friend))
             {
-                var beer = db.Beers.Include("Journal.Author").Where(b => b.Journal.Author.Id == friend.Id).ToList();
-                return View(beer);
+                return View(friend);
             }
             // Private profile and not friends
             return RedirectToAction("PrivateProfile", "Authors");
+        }
+
+        [ChildActionOnly]
+        public ActionResult BeersListFriend(string friendID)
+        {
+            var beers = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == friendID).ToList();
+            return PartialView(beers);
+        }
+
+
+
+        [ChildActionOnly]
+        public ActionResult FriendsBeers(string friendId)
+        {
+            // Query for all the friend's beer entries
+            var beers = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == friendId).ToList();
+
+            return PartialView(beers);
         }
 
         // GET: Beers/Create
@@ -156,10 +170,10 @@ namespace TheConnoisseur.Controllers
                     // Save data into database (both a Beer and Journal object will be saved)
                     db.Entry(original).State = EntityState.Modified;
                     db.SaveChanges();
-                    
-                    string resultMessage = "Journal " + original.Journal.Title + " successfully updated!";
+
+                    TempData["ResultMessage"] = original.Journal.Title + " was successfully updated!";
                     // Redirect to user's beer journals
-                    return RedirectToAction("BeerJournals", resultMessage);
+                    return RedirectToAction("BeerJournals");
                 }
                 // Not original author or mismatched IDs
                 RedirectToAction("Index", "Home");  // TODO: send them somewhere other than their homepage, invalid nasty user! Or faulty db...
@@ -188,9 +202,8 @@ namespace TheConnoisseur.Controllers
                 db.Journals.Remove(journal);
                 
                 db.SaveChanges();
-                // Result message is passed as parameter for BeerJournals controller
-                string resultMessage = "The journal entry was successfully deleted.";
-                return RedirectToAction("BeerJournals", resultMessage);
+                TempData["ResultMessage"] = "The journal was deleted.";
+                return RedirectToAction("BeerJournals");
             }
             // Current user did not write this journal, send to error page
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

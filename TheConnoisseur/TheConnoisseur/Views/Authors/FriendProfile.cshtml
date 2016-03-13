@@ -5,7 +5,7 @@
 }
 
 <h2>Connoisseur Info</h2>
-
+@Html.Action("AddAsFriend", "Authors", new { friendID = Model.Id })
 <!-- Author profile summary -->
 <div class="row panel">
     <div class="col-md-4 col-sm-12">
@@ -22,11 +22,13 @@
     </div>
 </div>
 
-
+<hr />
+<p>@Html.ActionLink("View All Connoisseur Friends", "AllFriends", "Authors", new { authorID = Model.Id }, new { @class = "btn btn-success" })</p>
 @Html.Action("FriendsList", new { authorId = Model.Id })
 
-
+@* TODO: make sure this the parameter in this link gets passed correctly *@
+<p>@Html.ActionLink("Read All Beer Entries", "FriendBeerJournals", "Beers", new { friend = Model.Id }, new { @class = "btn btn-success" })</p>
 @Html.Action("BeersList", new { authorId = Model.Id })
 
-
+<p>@Html.ActionLink("Read All Coffee Entries", "FriendCoffeeJournals", "Beers", new { friendID = Model.Id }, new { @class = "btn btn-success" })</p>
 @Html.Action("CoffeesList", new { authorId = Model.Id })

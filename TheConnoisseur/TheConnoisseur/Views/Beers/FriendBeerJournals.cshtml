@@ -1,8 +1,21 @@
-﻿@model IEnumerable<TheConnoisseur.Models.Beer>
+﻿@model TheConnoisseur.Models.Author
 
 @{
-    ViewBag.Title = "Beer Journals";
+    ViewBag.Title = Model.UserName + "'s Beer Journals";
 }
 
-<h2>@Model.Journal.Author.UserName's Beer Journals</h2>
+<h2>@Model.UserName's Beer Journals</h2>
 
+@Html.ActionLink("View Profile", "FriendProfile", "Authors", new { friendID = Model.Id }, new { @class = "btn btn-default" })
+
+@* If not friends, display "add friend" button *@
+
+@Html.Action("AddAsFriend", "Authors", new { friendID = Model.Id })
+
+<hr />
+
+
+
+@* Render the list of friend's beers *@
+
+@Html.Action("FriendsBeers", new { friendId = Model.Id })

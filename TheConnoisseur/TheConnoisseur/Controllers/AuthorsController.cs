@@ -43,12 +43,12 @@ namespace TheConnoisseur.Controllers
             // Public profile
             if (friend.PrivacyType == 1)
             {
-                return View("Index", friend);
+                return View(friend);
             }
             // For non-public profiles, ensure friendship has positive relation
             if (CheckFriendship(friend))
             {
-                return View("Index", friend);
+                return View(friend);
             }
             // Not friends
             return View("NotFriendsYet", friend);
@@ -93,10 +93,26 @@ namespace TheConnoisseur.Controllers
             return PartialView(coffees);
         }
 
+        [ChildActionOnly]
+        public ActionResult AddAsFriend(string friendID)
+        {
+            var friend = db.Users.Find(friendID);
+            if(CheckFriendship(friend))
+            {
+                return PartialView(null);
+            }
+            else
+            {
+                return PartialView(friend);
+            }
+        }
+
         // TODO: create a nice view and query for all friends of the author
         public ActionResult AllFriends(string authorId)
         {
+            Author author = db.Users.Find(authorId);
             // If profile isn't public, validate friendship before querying for their friends
+
             return View();
         }
 
