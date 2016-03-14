@@ -72,10 +72,9 @@ namespace TheConnoisseur.Controllers
         public ActionResult BeersList(string authorId)
         {
             // Grab three most recent beer journals with authorId
-            var beers = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == authorId).OrderBy(b => b.Journal.Date).Take(3).ToList();
+            var beers = db.Beers.Include("Journal.Author").Where(b => b.Journal.Author.Id == authorId).OrderBy(b => b.Journal.Date).Take(3).ToList();
             
             // Shorten the description for brief viewing
-            // TODO: Check the display length of 200 characters and possibly increase it.
             foreach (Beer b in beers)
             {
                 if (b.Journal.Description.Length > 115)
@@ -95,7 +94,7 @@ namespace TheConnoisseur.Controllers
 
         [ChildActionOnly]
         public ActionResult AddAsFriend(string friendID)
-        {
+        {   // TODO: create a pending requests table and appropriate view and controllers to manage adding friends
             var friend = db.Users.Find(friendID);
             if(CheckFriendship(friend))
             {
@@ -108,12 +107,75 @@ namespace TheConnoisseur.Controllers
         }
 
         // TODO: create a nice view and query for all friends of the author
-        public ActionResult AllFriends(string authorId)
+        // This view will have a "remove" button added to each profile. Return author and have childaction get list of friend authors, attaching the remove button to each profile
+        public ActionResult AllYourFriends()
         {
-            Author author = db.Users.Find(authorId);
-            // If profile isn't public, validate friendship before querying for their friends
+            string yourId = User.Identity.GetUserId();
+            var friends = (from a in db.Users
+                           join f in db.Friendships on a.Id equals f.AuthorID1
+                           where f.AuthorID2 == yourId && f.Relation == true
+                           select a).ToList();
+            // All friends should display authors username, state, profile picture, tagline, and favitem along with an "add as friend" button if a relationship doesn't exist.
+            // Author's friends list should include a "remove" button that deletes friend relationship from the database
+            return View(friends);
+        }
 
-            return View();
+        // Validate friendship, then pass the friend author into the view, use childaction to get list of their friends, use another child action to load add friend button for each author iterated in list.
+        public ActionResult AllTheirFriends(string authorID)
+        {
+            var friend = db.Users.Find(authorID);
+            // User arrived with invalid parameter
+            if (friend == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            // Public profile
+            if (friend.PrivacyType == 1)
+            {
+                return View(friend);
+            }
+            // For non-public profiles, ensure friendship has positive relation
+            if (CheckFriendship(friend))
+            {
+                return View(friend);
+            }
+            // Not friends
+            return View("NotFriendsYet", friend);
+        }
+
+        [ChildActionOnly]
+        public ActionResult AllTheirFriendsList(string authorID)
+        {
+            var friends = (from a in db.Users
+                           join f in db.Friendships on a.Id equals f.AuthorID1
+                           where f.AuthorID2 == authorID && f.Relation == true
+                           select a).ToList();
+
+            return PartialView(friends);
+        }
+
+        [ChildActionOnly]
+        public ActionResult AddNewFriendButton(string friendID)
+        {
+            var friend = db.Users.Find(friendID);
+            // it's you
+            if (friend.Id == User.Identity.GetUserId())
+            {
+                return null;
+            }
+            // check if already friends
+            if (!CheckFriendship(friend))
+            {
+                return PartialView(friend);
+            }
+            // Already friends, don't load friend button
+            return null;
+        }
+
+        public ActionResult AddFriend(string authorID)
+        {
+            // TODO: implement add friend
+            return null;
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TheConnoisseur.Models.Author>
+
+@{
+    ViewBag.Title = "Your Friends";
+}
+<h2>Your Connoisseur Friends</h2>
+<hr />
+<span class="h4 text-danger">@ViewBag.ResultMessage</span>
+
+<div class="row">
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="pull-left col-sm-6">
+                    <img src="@item.AvatarPath" alt="Author Avatar" />
+                    <br />
+                    <br />
+                    @item.FirstName @item.LastName
+                    <br />
+                    AKA: @Html.ActionLink(item.UserName, "FriendProfile", new { friendID = item.Id })
+                </div>
+                <div class="pull-left col-sm-6">
+                    @item.City, @item.State
+                    <br />
+                    <b>Current Favorite:</b>
+                    <br />
+                    @item.FavItem
+                    <hr />
+                    "@item.Tagline"
+                    <br />
+                    <br />
+                    <br />@* Use delete button like in Authorization delete, instead of the one below.
+    @Html.ActionLink("Denounce Friendship", "DeleteFriend", new { friendID = item.Id }, new { @class = "btn btn-sm btn-warning" })*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+</div>

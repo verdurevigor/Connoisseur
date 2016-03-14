@@ -24,7 +24,7 @@
                         <br />
                         @item.Journal.Description
                         <br />
-                        <a href="@Url.Action("FriendBeerJournals", "Beers", new { friendID = item.Journal.Author.Id })#@item.BeerID" class="btn btn-default btn-block">Read Full</a>
+                        <a href="@Url.Action("FriendBeerJournal", "Beers", new { friendID = item.Journal.Author.Id })#@item.BeerID" class="btn btn-default btn-block">Read Full</a>
                     </div>
                 </div>
             </div>

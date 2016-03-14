@@ -45,7 +45,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 2,
                 Tagline = "I know what you drank last summer.",
                 UserName = "Admin",
-                AvatarPath = "/Content/Image/newavatar.png"
+                AvatarPath = "/Content/Image/facesunglasses.png"
             };
 
             Author a1 = new Author()
@@ -60,7 +60,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 1,
                 Tagline = "Coffee coffee - buzz buzz Buzz!",
                 UserName = "Brodster",
-                AvatarPath = "/Content/Image/newavatar.png"
+                AvatarPath = "/Content/Image/facesupersmile.png"
             };
 
             Author a2 = new Author()
@@ -75,7 +75,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 3,
                 Tagline = "Beer + cats are a fun time",
                 UserName = "PhilosophicalDrinker",
-                AvatarPath = "/Content/Image/newavatar.png"
+                AvatarPath = "/Content/Image/facegrinning.png"
             };
 
             Author a3 = new Author()
@@ -90,7 +90,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 1,
                 Tagline = "Summertime is only a pint away.",
                 UserName = "Flowerchild",
-                AvatarPath = "/Content/Image/newavatar.png"
+                AvatarPath = "/Content/Image/facerelieved.png"
             };
 
             
@@ -112,7 +112,7 @@ namespace TheConnoisseur.Migrations
             userManager.AddToRole(aid, "Admin");
             context.SaveChanges();                  // TODO: Investigate why context.SaveChanges() is used when db.SaveChanges() and userManager are used here.
             */
-            
+
             // This section of Author querying is only for use if the Users have been created but the Journal or Friendship has not.
             var a1 = (from a in context.Users where a.UserName == "Brodster" select a).FirstOrDefault();
             var a2 = (from a in context.Users where a.UserName == "PhilosophicalDrinker" select a).FirstOrDefault();

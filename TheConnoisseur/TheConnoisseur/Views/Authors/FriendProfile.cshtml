@@ -23,12 +23,12 @@
 </div>
 
 <hr />
-<p>@Html.ActionLink("View All Connoisseur Friends", "AllFriends", "Authors", new { authorID = Model.Id }, new { @class = "btn btn-success" })</p>
+<p>@Html.ActionLink("View All Connoisseur Friends", "AllTheirFriends", "Authors", new { authorID = Model.Id }, new { @class = "btn btn-success" })</p>
 @Html.Action("FriendsList", new { authorId = Model.Id })
 
-@* TODO: make sure this the parameter in this link gets passed correctly *@
-<p>@Html.ActionLink("Read All Beer Entries", "FriendBeerJournals", "Beers", new { friend = Model.Id }, new { @class = "btn btn-success" })</p>
+@* TODO: make sure the parameter in this link gets passed correctly *@
+<p>@Html.ActionLink("Read " + Model.UserName + "'s Beer Journal", "FriendBeerJournal", "Beers", new { friendID = Model.Id }, new { @class = "btn btn-success" })</p>
 @Html.Action("BeersList", new { authorId = Model.Id })
 
-<p>@Html.ActionLink("Read All Coffee Entries", "FriendCoffeeJournals", "Beers", new { friendID = Model.Id }, new { @class = "btn btn-success" })</p>
+<p>@Html.ActionLink("Read " + Model.UserName + "'s Coffee Journal", "FriendCoffeeJournal", "Coffees", new { friendID = Model.Id }, new { @class = "btn btn-success" })</p>
 @Html.Action("CoffeesList", new { authorId = Model.Id })

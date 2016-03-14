@@ -22,7 +22,7 @@
                         @item.Journal.Description
                         <br />
                         @*@Html.ActionLink("Read", "Details", "Beers", new { Id = @item.BeerID }, new { @class = "btn btn-default btn-block" })*@
-                        <a href="@Url.Action("BeerJournals", "Beers")#@item.BeerID" class="btn btn-default btn-block">Read</a>
+                        <a href="@Url.Action("FriendBeerJournal", "Beers", new { friendID = item.Journal.Author.Id })#@item.BeerID" class="btn btn-default btn-block">Read</a>
                     </div>
                 </div>
             </div>

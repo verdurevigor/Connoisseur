@@ -4,7 +4,7 @@
     ViewBag.Title = Model.UserName + "'s Beer Journals";
 }
 
-<h2>@Model.UserName's Beer Journals</h2>
+<h2>@Model.UserName's Beer Entries</h2>
 
 @Html.ActionLink("View Profile", "FriendProfile", "Authors", new { friendID = Model.Id }, new { @class = "btn btn-default" })
 

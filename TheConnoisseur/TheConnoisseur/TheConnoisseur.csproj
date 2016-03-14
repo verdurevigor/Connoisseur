@@ -129,6 +129,11 @@
     <Content Include="Content\Images\beerglass.png" />
     <Content Include="Content\Images\beerlineup.jpg" />
     <Content Include="Content\Images\beermug.png" />
+    <Content Include="Content\Images\facegrinning.png" />
+    <Content Include="Content\Images\facerelieved.png" />
+    <Content Include="Content\Images\facesunglasses.png" />
+    <Content Include="Content\Images\facesupersmile.png" />
+    <Content Include="Content\Images\facetongue.png" />
     <Content Include="Content\Images\hops-banner.png" />
     <Content Include="Content\Images\hops.jpg" />
     <Content Include="Content\Images\coffeemug.png" />
@@ -166,7 +171,7 @@
     <Content Include="Views\Beers\Delete.cshtml" />
     <Content Include="Views\Beers\Details.cshtml" />
     <Content Include="Views\Beers\Edit.cshtml" />
-    <Content Include="Views\Beers\BeerJournals.cshtml" />
+    <Content Include="Views\Beers\YourBeerJournal.cshtml" />
     <Content Include="Views\Coffees\Create.cshtml" />
     <Content Include="Views\Coffees\Delete.cshtml" />
     <Content Include="Views\Coffees\Details.cshtml" />
@@ -229,13 +234,17 @@
     <Content Include="Views\DataVisibility\Beers.cshtml" />
     <Content Include="Views\DataVisibility\Coffees.cshtml" />
     <Content Include="Views\Authors\NotFriendsYet.cshtml" />
-    <Content Include="Views\Beers\FriendBeerJournals.cshtml" />
+    <Content Include="Views\Beers\FriendBeerJournal.cshtml" />
     <Content Include="Views\Journals\Lists.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Authors\FriendProfile.cshtml" />
     <Content Include="Views\Search\ResultBeer.cshtml" />
     <Content Include="Views\Beers\FriendsBeers.cshtml" />
     <Content Include="Views\Authors\AddAsFriend.cshtml" />
+    <Content Include="Views\Authors\AllYourFriends.cshtml" />
+    <Content Include="Views\Authors\AllTheirFriends.cshtml" />
+    <Content Include="Views\Authors\AllTheirFriendsList.cshtml" />
+    <Content Include="Views\Authors\AddNewFriendButton.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

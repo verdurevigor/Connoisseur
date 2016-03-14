@@ -15,8 +15,8 @@ namespace TheConnoisseur.Controllers
     {
         private AppDbContext db = new AppDbContext();
 
-        // GET: Beers/BeerJournals
-        public ActionResult BeerJournals()
+        // GET: Beers/YourBeerJournal
+        public ActionResult YourBeerJournal()
         {
             // Get list of all beer journal entries for the currently signed in user
             var you = db.Users.Find(User.Identity.GetUserId());
@@ -25,9 +25,9 @@ namespace TheConnoisseur.Controllers
             return View(beers);
         }
         
-        // GET: Beers/FriendBeerjournals/FriendId
-        // Returns Author object to FriendBeerJournals page where ChildAction FriendsBeers is fired
-        public ActionResult FriendBeerJournals(string friendID)
+        // GET: Beers/FriendBeerjournal/FriendId
+        // Returns Author object to FriendBeerJournal page where ChildAction FriendsBeers is fired
+        public ActionResult FriendBeerJournal(string friendID)
         {
             var friend = (from a in db.Users
                           where a.Id == friendID
@@ -42,7 +42,7 @@ namespace TheConnoisseur.Controllers
             {
                 string yourId = User.Identity.GetUserId();
                 var beer = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == yourId).ToList();
-                return View("BeerJournals", beer);
+                return View("YourBeerJournal", beer);
             }
             // If profile is public, pass friend along
             if (friend.PrivacyType == 1)
@@ -54,7 +54,7 @@ namespace TheConnoisseur.Controllers
             {
                 return View(friend);
             }
-            // Private profile and not friends
+            // Friends Only profile and not friends
             return RedirectToAction("PrivateProfile", "Authors");
         }
 
@@ -137,7 +137,7 @@ namespace TheConnoisseur.Controllers
                 return View(beer);
             }
             // Not original author
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest); // TODO: Replace all HttpStatusCodeResult(HttpStatusCode.BadRequest) with the Error.cshtml page
         }
 
         // POST: Beers/Edit/5
@@ -173,7 +173,7 @@ namespace TheConnoisseur.Controllers
 
                     TempData["ResultMessage"] = original.Journal.Title + " was successfully updated!";
                     // Redirect to user's beer journals
-                    return RedirectToAction("BeerJournals");
+                    return RedirectToAction("YourBeerJournal");
                 }
                 // Not original author or mismatched IDs
                 RedirectToAction("Index", "Home");  // TODO: send them somewhere other than their homepage, invalid nasty user! Or faulty db...
@@ -203,7 +203,7 @@ namespace TheConnoisseur.Controllers
                 
                 db.SaveChanges();
                 TempData["ResultMessage"] = "The journal was deleted.";
-                return RedirectToAction("BeerJournals");
+                return RedirectToAction("YourBeerJournal");
             }
             // Current user did not write this journal, send to error page
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

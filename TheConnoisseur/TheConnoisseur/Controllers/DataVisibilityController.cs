@@ -65,5 +65,18 @@ namespace TheConnoisseur.Controllers
             db.SaveChanges();
             return View("Index");
         }
+
+        public ActionResult UpdateAuthorIcons()
+        {
+            var authors = db.Users.ToList();
+            foreach (Author a in authors)
+            {
+                a.AvatarPath = "/Content/Images/facesupersmile.png";
+                db.Entry(a).State = EntityState.Modified;
+            }
+
+            db.SaveChanges();
+            return View("Index");
+        }
     }
 }
