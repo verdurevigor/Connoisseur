@@ -212,6 +212,7 @@
     <Compile Include="Models\Beer.cs" />
     <Compile Include="Models\Coffee.cs" />
     <Compile Include="Models\Friendship.cs" />
+    <Compile Include="Models\FriendshipPending.cs" />
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\LogInViewModel.cs" />
     <Compile Include="Models\PrivacyType.cs" />
@@ -240,11 +241,11 @@
     <Content Include="Views\Authors\FriendProfile.cshtml" />
     <Content Include="Views\Search\ResultBeer.cshtml" />
     <Content Include="Views\Beers\FriendsBeers.cshtml" />
-    <Content Include="Views\Authors\AddAsFriend.cshtml" />
+    <Content Include="Views\Authors\AddNewFriendButton.cshtml" />
     <Content Include="Views\Authors\AllYourFriends.cshtml" />
     <Content Include="Views\Authors\AllTheirFriends.cshtml" />
     <Content Include="Views\Authors\AllTheirFriendsList.cshtml" />
-    <Content Include="Views\Authors\AddNewFriendButton.cshtml" />
+    <Content Include="Views\Search\ResultAuthor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

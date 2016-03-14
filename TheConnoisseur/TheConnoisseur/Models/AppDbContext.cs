@@ -21,5 +21,6 @@ namespace TheConnoisseur.Models
         public System.Data.Entity.DbSet<TheConnoisseur.Models.Privacy> Privacies { get; set; }
 
         public System.Data.Entity.DbSet<TheConnoisseur.Models.Friendship> Friendships { get; set; }
+        public System.Data.Entity.DbSet<TheConnoisseur.Models.FriendshipPending> FriendshipsPending { get; set; }
     }
 }

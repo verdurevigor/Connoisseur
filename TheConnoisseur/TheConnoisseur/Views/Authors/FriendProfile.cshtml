@@ -5,7 +5,8 @@
 }
 
 <h2>Connoisseur Info</h2>
-@Html.Action("AddAsFriend", "Authors", new { friendID = Model.Id })
+@Html.Action("AddNewFriendButton", "Authors", new { friendID = Model.Id })
+<span class="h3 text-info">@TempData["BefriendResultMessage"]</span>
 <!-- Author profile summary -->
 <div class="row panel">
     <div class="col-md-4 col-sm-12">

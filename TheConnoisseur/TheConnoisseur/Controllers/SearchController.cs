@@ -50,6 +50,14 @@ namespace TheConnoisseur.Controllers
             var beers = db.Beers.Include("Journal.Author").Where(b => b.Journal.PrivacyType == 1 && b.Journal.Description.Contains(searchTerm) || b.Journal.Title.Contains(searchTerm) || b.Journal.Maker.Contains(searchTerm) || b.Journal.Location.Contains(searchTerm) || b.Style.Contains(searchTerm)).ToList();
             return PartialView(beers);
         }
+
+        [ChildActionOnly]
+        public ActionResult ResultAuthor(string searchTerm)
+        {
+            // Returns a list of authors by querying against UserName, First and Last Names, Last name, First name, and City
+            var authors = db.Users.Where(a => a.UserName.Contains(searchTerm) || (a.FirstName.Contains(searchTerm) && a.LastName.Contains(searchTerm)) || a.LastName.Contains(searchTerm) || a.FirstName.Contains(searchTerm) || a.City.Contains(searchTerm)).ToList();
+            return PartialView(authors);
+        }
         
         // Method is used to repopulate search type
         private List<SelectListItem> PrePopulateTypeList()

@@ -40,6 +40,11 @@ namespace TheConnoisseur.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // Your own profile
+            if (friend.Id == User.Identity.GetUserId())
+            {
+                return RedirectToAction("Index");
+            }
             // Public profile
             if (friend.PrivacyType == 1)
             {
@@ -90,20 +95,6 @@ namespace TheConnoisseur.Controllers
             var coffees = db.Coffees.Include("Journal").Where(b => b.Journal.Author.Id == authorId).OrderBy(b => b.Journal.Date).Take(3).ToList();
             // TODO: Implement Journal.Description shortening
             return PartialView(coffees);
-        }
-
-        [ChildActionOnly]
-        public ActionResult AddAsFriend(string friendID)
-        {   // TODO: create a pending requests table and appropriate view and controllers to manage adding friends
-            var friend = db.Users.Find(friendID);
-            if(CheckFriendship(friend))
-            {
-                return PartialView(null);
-            }
-            else
-            {
-                return PartialView(friend);
-            }
         }
 
         // TODO: create a nice view and query for all friends of the author
@@ -172,10 +163,30 @@ namespace TheConnoisseur.Controllers
             return null;
         }
 
-        public ActionResult AddFriend(string authorID)
+        public ActionResult RequestFriendship(string friendID)
         {
-            // TODO: implement add friend
-            return null;
+            // Validate query token
+            var friend = db.Users.Find(friendID);
+            if (friend != null)
+            {
+                // Ensure a request hasn't already been placed.
+                string you = User.Identity.GetUserId();
+                var exists = db.FriendshipsPending.Where(f => (f.AuthorID1 == friend.Id && f.AuthorID2 == you) || (f.AuthorID2 == friend.Id && f.AuthorID1 == you)).FirstOrDefault();
+                if (exists == null) // Request doesn't exist
+                {
+                    FriendshipPending fp = new FriendshipPending() { AuthorID1 = friend.Id, AuthorID2 = you };
+                    db.FriendshipsPending.Add(fp);
+                    db.SaveChanges();
+                    // Request made, send to friend's profile with BefriendResultMessage
+                    TempData["BefriendResultMessage"] = "A friend request has been made.";
+                    return RedirectToAction("FriendProfile", friend.Id);// Action not view...
+                }
+                // Subsequent request placed, inform user.
+                TempData["BefriendResultMessage"] = "You have already requested a friendship.";
+                return RedirectToAction("FriendProfile", friend.Id);
+            }
+            // Invalid request.
+            return View("Error");
         }
 
         protected override void Dispose(bool disposing)
@@ -192,11 +203,17 @@ namespace TheConnoisseur.Controllers
         {
             // Check friendship table with currently signed in user and requested user
             var you = db.Users.Find(User.Identity.GetUserId());
-
+            /*
             var relationship = (from f in db.Friendships
                                 where f.AuthorID1 == friend.Id
                                 && f.AuthorID2 == you.Id
                                 select f.Relation).FirstOrDefault();
+            */
+            var relationship = (from f in db.Friendships
+                                where (f.AuthorID1 == friend.Id && f.AuthorID2 == you.Id) 
+                                   || (f.AuthorID2 == friend.Id && f.AuthorID1 == you.Id)
+                                select f.Relation).FirstOrDefault();
+
             // true = friends, false = not friends
             return relationship;
         }
