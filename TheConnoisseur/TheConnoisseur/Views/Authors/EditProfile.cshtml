@@ -17,6 +17,7 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -61,18 +62,34 @@
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PrivacyType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <label class="radio-inline">
-                    <input type="radio" name="rating" id="rating1" value="1">Public
+                    <input type="radio" name="PrivacyType" id="rating1" value="1">Public
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="rating" id="rating2" value="2">Friends Only
+                    <input type="radio" name="PrivacyRating" id="rating2" value="2">Friends Only
                 </label>
                 @Html.ValidationMessageFor(model => model.PrivacyType, "", new { @class = "text-danger" })
             </div>

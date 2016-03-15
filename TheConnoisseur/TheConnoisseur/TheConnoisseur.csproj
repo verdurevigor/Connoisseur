@@ -129,6 +129,7 @@
     <Content Include="Content\Images\beerglass.png" />
     <Content Include="Content\Images\beerlineup.jpg" />
     <Content Include="Content\Images\beermug.png" />
+    <Content Include="Content\Images\evaluationtime.jpg" />
     <Content Include="Content\Images\facegrinning.png" />
     <Content Include="Content\Images\facerelieved.png" />
     <Content Include="Content\Images\facesunglasses.png" />

@@ -21,6 +21,31 @@ namespace TheConnoisseur.Controllers
             return View(you);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile([Bind(Include = "Author,Coffee")] Author edited)
+        {
+            if (ModelState.IsValid)
+            {
+                Author old = db.Users.Find(edited.Id);
+                if (old != null)
+                {
+                    old.City = edited.City;
+                    old.State = edited.State;
+                    old.Tagline = edited.Tagline;
+                    old.FavItem = edited.FavItem;
+                    old.FirstName = edited.FirstName;
+                    old.LastName = edited.LastName;
+                    old.PrivacyType = edited.PrivacyType;
+
+                    db.Entry(old).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return View("Error");
+        }
+
         public ActionResult PrivateProfile(Author author)
         {
             if (author != null)
