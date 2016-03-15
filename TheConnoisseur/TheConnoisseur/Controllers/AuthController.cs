@@ -98,7 +98,8 @@ namespace TheConnoisseur.Controllers
                 UserName = model.UserName,
                 State = model.State,
                 City = model.City,
-                PrivacyType = model.PrivacyType
+                PrivacyType = model.PrivacyType,
+                DateCreated = DateTime.Now
             };
 
             var result = userManager.Create(user, model.Password);

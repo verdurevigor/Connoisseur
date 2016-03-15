@@ -1,17 +1,12 @@
 ﻿@model IEnumerable<TheConnoisseur.Models.Beer>
 
-@if (Model.Count() == 0)
-{
-    <h4>No beer results were found.</h4>
-}
-else
-{
+<h3>Beer of the highest standards!</h3>
 
 <div class="row">
 
     @foreach (var item in Model)
     {
-    
+
         <div class="col-md-4 col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -21,7 +16,7 @@ else
                         @item.Journal.Title
                         by @item.Journal.Maker
                         <br />
-                        Author: 
+                        Author:
                         @Html.ActionLink(item.Journal.Author.UserName, "FriendProfile", "Authors", new { friendID = item.Journal.Author.Id }, new { @class = "" })
                     </div>
                     <div class="pull-left col-sm-6">
@@ -39,5 +34,3 @@ else
     }
 
 </div>
-
-}

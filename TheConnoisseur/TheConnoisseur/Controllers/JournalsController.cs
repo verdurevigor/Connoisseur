@@ -20,11 +20,23 @@ namespace TheConnoisseur.Views
         
         public ActionResult Lists()
         {
-            // TODO: query database for a short list of jounals
-            // For now this is used to display all journals and delete them (testing purposes)
-            var journals = db.Journals.ToList();
+            return View();
+        }
 
-            return View(journals);
+        [ChildActionOnly]
+        public ActionResult HighestBeerList()
+        {
+            // Get the ten highest rated beer reviews, only including public connoisseurs
+            var beers = db.Beers.Include("Journal.Author").Where(b => b.Journal.Rating == 5 && b.Journal.Author.PrivacyType == 1).Take(10).ToList();
+            return PartialView(beers);
+        }
+
+        [ChildActionOnly]
+        public ActionResult LowestBeerList()
+        {
+            // Get the ten lowest rated beer reviews, only including public connoisseurs
+            var beers = db.Beers.Include("Journal.Author").Where(b => b.Journal.Rating >= 1 && b.Journal.Rating <= 3 && b.Journal.Author.PrivacyType == 1).Take(10).ToList();
+            return PartialView(beers);
         }
 
         // GET: Journals/Search

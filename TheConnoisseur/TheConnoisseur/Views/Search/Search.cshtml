@@ -40,7 +40,7 @@
 
 @* Ensure model is valid before calling partialview controller method. *@
 @if (IsPost)
-{ 
+{
     if (ViewData.ModelState.IsValid)
     {
         if (Model.SearchType == "Author")

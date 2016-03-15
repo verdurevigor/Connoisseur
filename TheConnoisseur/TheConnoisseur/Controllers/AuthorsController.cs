@@ -15,6 +15,12 @@ namespace TheConnoisseur.Controllers
     {
         private AppDbContext db = new AppDbContext();
 
+        public ActionResult EditProfile()
+        {
+            Author you = db.Users.Find(User.Identity.GetUserId());
+            return View(you);
+        }
+
         public ActionResult PrivateProfile(Author author)
         {
             if (author != null)

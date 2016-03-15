@@ -194,6 +194,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Controllers\CoffeesController.cs" />
@@ -249,6 +250,17 @@
     <Content Include="Views\Authors\PendingFriends.cshtml" />
     <Content Include="Views\Authors\PendingFriendsList.cshtml" />
     <Content Include="Views\Authors\AcceptNewFriendButton.cshtml" />
+    <Content Include="Views\Authorization\CreateRole.cshtml" />
+    <Content Include="Views\Authorization\EditRole.cshtml" />
+    <Content Include="Views\Authorization\GetRoles.cshtml" />
+    <Content Include="Views\Authorization\Index.cshtml" />
+    <Content Include="Views\Authorization\ListRoles.cshtml" />
+    <Content Include="Views\Authorization\ManageMembers.cshtml" />
+    <Content Include="Views\Authorization\ManageBeer.cshtml" />
+    <Content Include="Views\Authorization\ManageRoles.cshtml" />
+    <Content Include="Views\Journals\HighestBeerList.cshtml" />
+    <Content Include="Views\Journals\LowestBeerList.cshtml" />
+    <Content Include="Views\Authors\EditProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
