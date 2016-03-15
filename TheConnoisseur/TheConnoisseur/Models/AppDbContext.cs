@@ -13,7 +13,7 @@ namespace TheConnoisseur.Models
     {
         public AppDbContext() : base("DefaultConnection")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
         }
 
         public System.Data.Entity.DbSet<TheConnoisseur.Models.Journal> Journals { get; set; }

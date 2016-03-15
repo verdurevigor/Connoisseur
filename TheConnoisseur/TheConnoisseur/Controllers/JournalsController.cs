@@ -18,11 +18,12 @@ namespace TheConnoisseur.Views
 
         // GET: Journals/Lists
         
+        [AllowAnonymous]
         public ActionResult Lists()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [ChildActionOnly]
         public ActionResult HighestBeerList()
         {
@@ -30,7 +31,7 @@ namespace TheConnoisseur.Views
             var beers = db.Beers.Include("Journal.Author").Where(b => b.Journal.Rating == 5 && b.Journal.Author.PrivacyType == 1).Take(10).ToList();
             return PartialView(beers);
         }
-
+        [AllowAnonymous]
         [ChildActionOnly]
         public ActionResult LowestBeerList()
         {
