@@ -1,0 +1,10 @@
+﻿@model TheConnoisseur.Models.Author
+
+@if (Model != null)
+{ 
+    using (Html.BeginForm("AcceptFriend", "Authors", FormMethod.Post))
+    {
+        <input type="hidden" name="friendID" value="@Model.Id" />
+        <button type="submit" class="btn btn-block btn-success">Confirm Friendship</button>
+    }
+}

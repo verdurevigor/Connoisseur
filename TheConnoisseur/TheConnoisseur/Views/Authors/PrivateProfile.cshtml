@@ -1,7 +1,7 @@
 ﻿@model TheConnoisseur.Models.Author
 
 @{
-    ViewBag.Title = "PrivateProfile";
+    ViewBag.Title = "Private Profile";
 }
 
 <h2>Private Profile</h2>
@@ -13,5 +13,6 @@
 else
 {
     <p>@Model.UserName has a profile viewable by friends only.</p>
-    <button type="submit">Add Friend</button>   @* TODO: Complete the Add Friend functionality. *@
+    @Html.Action("AddNewFriendButton", "Authors", new { friendID = Model.Id })
+    @Html.Action("AcceptNewFriendButton", "Authors", new { friendID = Model.Id })
 }

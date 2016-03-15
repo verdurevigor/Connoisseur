@@ -5,8 +5,8 @@
 }
 
 <h2>Connoisseur Info</h2>
-@Html.Action("AddNewFriendButton", "Authors", new { friendID = Model.Id })
-<span class="h3 text-info">@TempData["BefriendResultMessage"]</span>
+@Html.Action("AddNewFriendButton", "Authors", new { friendID = Model.Id }) @Html.Action("AcceptNewFriendButton", "Authors", new { friendID = Model.Id })
+<h3 class="text-info">@TempData["BefriendResultMessage"]</h3>
 <!-- Author profile summary -->
 <div class="row panel">
     <div class="col-md-4 col-sm-12">
@@ -30,6 +30,7 @@
 @* TODO: make sure the parameter in this link gets passed correctly *@
 <p>@Html.ActionLink("Read " + Model.UserName + "'s Beer Journal", "FriendBeerJournal", "Beers", new { friendID = Model.Id }, new { @class = "btn btn-success" })</p>
 @Html.Action("BeersList", new { authorId = Model.Id })
-
+@*
 <p>@Html.ActionLink("Read " + Model.UserName + "'s Coffee Journal", "FriendCoffeeJournal", "Coffees", new { friendID = Model.Id }, new { @class = "btn btn-success" })</p>
 @Html.Action("CoffeesList", new { authorId = Model.Id })
+*@

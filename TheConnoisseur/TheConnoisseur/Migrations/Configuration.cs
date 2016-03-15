@@ -45,7 +45,22 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 2,
                 Tagline = "I know what you drank last summer.",
                 UserName = "Admin",
-                AvatarPath = "/Content/Image/facesunglasses.png"
+                AvatarPath = "/Content/Images/facesunglasses.png"
+            };
+
+            Author mod = new Author()
+            {
+                City = "Tiny Town",
+                State = "OR",
+                DateCreated = new DateTime(2000, 1, 1, 0, 0, 0),
+                Email = "mod@email.com",
+                FavItem = "Miller stuff.",
+                FirstName = "Mod",
+                LastName = "Erator",
+                PrivacyType = 2,
+                Tagline = "I've been around the block a few times",
+                UserName = "Moderator",
+                AvatarPath = "/Content/Images/facegrinning.png"
             };
 
             Author a1 = new Author()
@@ -60,7 +75,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 1,
                 Tagline = "Coffee coffee - buzz buzz Buzz!",
                 UserName = "Brodster",
-                AvatarPath = "/Content/Image/facesupersmile.png"
+                AvatarPath = "/Content/Images/facesupersmile.png"
             };
 
             Author a2 = new Author()
@@ -75,7 +90,7 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 3,
                 Tagline = "Beer + cats are a fun time",
                 UserName = "PhilosophicalDrinker",
-                AvatarPath = "/Content/Image/facegrinning.png"
+                AvatarPath = "/Content/Images/facegrinning.png"
             };
 
             Author a3 = new Author()
@@ -90,29 +105,49 @@ namespace TheConnoisseur.Migrations
                 PrivacyType = 1,
                 Tagline = "Summertime is only a pint away.",
                 UserName = "Flowerchild",
-                AvatarPath = "/Content/Image/facerelieved.png"
+                AvatarPath = "/Content/Images/facerelieved.png"
+            };
+            
+            Author a4 = new Author()
+            {
+                City = "Portland",
+                State = "OR",
+                DateCreated = new DateTime(2016, 2, 9, 0, 0, 0),
+                Email = "missy@email.com",
+                FavItem = "PBR",
+                FirstName = "Missy",
+                LastName = "Meida",
+                PrivacyType = 1,
+                Tagline = "Simple, smooth, and refreshing is what I'm after.",
+                UserName = "Missy",
+                AvatarPath = "/Content/Images/facetongue.png"
             };
 
-            
             // Add users with userManager
             userManager.Create(admin, "password");
+            userManager.Create(mod, "password");
             userManager.Create(a1, "password");
             userManager.Create(a2, "password");
             userManager.Create(a3, "password");
+            userManager.Create(a4, "password");
 
             // Get user Ids explicitly to add role to the user
             string aid = (from u in context.Users
                           where u.UserName == admin.UserName
                           select u.Id).FirstOrDefault();
-
+            string mid = (from u in context.Users
+                          where u.UserName == mod.UserName
+                          select u.Id).FirstOrDefault();
             // Generate Role
             context.Roles.AddOrUpdate(r => r.Name, new IdentityRole() { Name = "Admin" });
+            context.Roles.AddOrUpdate(r => r.Name, new IdentityRole() { Name = "Moderator" });
             context.SaveChanges();
             // Assign Roles to Authors
             userManager.AddToRole(aid, "Admin");
+            userManager.AddToRole(mid, "Moderator");
             context.SaveChanges();                  // TODO: Investigate why context.SaveChanges() is used when db.SaveChanges() and userManager are used here.
             */
-
+            
             // This section of Author querying is only for use if the Users have been created but the Journal or Friendship has not.
             var a1 = (from a in context.Users where a.UserName == "Brodster" select a).FirstOrDefault();
             var a2 = (from a in context.Users where a.UserName == "PhilosophicalDrinker" select a).FirstOrDefault();
@@ -126,16 +161,18 @@ namespace TheConnoisseur.Migrations
             Friendship f1b = new Friendship() { AuthorID1 = a2.Id, AuthorID2 = a1.Id, Relation = true };
             Friendship f2a = new Friendship() { AuthorID1 = a1.Id, AuthorID2 = a3.Id, Relation = true };
             Friendship f2b = new Friendship() { AuthorID1 = a3.Id, AuthorID2 = a1.Id, Relation = true };
-            Friendship f3 = new Friendship() { AuthorID1 = a3.Id, AuthorID2 = a2.Id, Relation = false };
+            Friendship f3a = new Friendship() { AuthorID1 = a3.Id, AuthorID2 = a2.Id, Relation = true };
+            Friendship f3b = new Friendship() { AuthorID1 = a2.Id, AuthorID2 = a3.Id, Relation = true };
             context.Friendships.Add(f1a);
             context.Friendships.Add(f1b);
             context.Friendships.Add(f2a);
             context.Friendships.Add(f2b);
-            context.Friendships.Add(f3);
+            context.Friendships.Add(f3a);
+            context.Friendships.Add(f3b);
             SaveChanges(context);
             */
 
-            
+
             // Generate Journals (with Author), then Subtype (coffee, beer) and set the Journal into the Subtype before saving.
             Journal j1 = new Journal()
             {
@@ -257,7 +294,8 @@ namespace TheConnoisseur.Migrations
             Privacy p2 = new Privacy() { PrivacyID = 2, Name = "Private" };
             Privacy p3 = new Privacy() { PrivacyID = 3, Name = "Friends Only" };
             context.Privacies.AddOrUpdate(p => p.Name, p1, p2, p3);
-            
+
+
             SaveChanges(context);
         }
 

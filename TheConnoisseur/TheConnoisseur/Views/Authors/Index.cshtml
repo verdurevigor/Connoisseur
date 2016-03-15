@@ -3,9 +3,9 @@
 @{
     ViewBag.Title = "Your Profile";
 }
-
-@Html.ActionLink("Journal Coffee", "Create", "Coffees") |
-@Html.ActionLink("Journal Beer", "Create", "Beers")
+@*
+@Html.ActionLink("Journal Coffee", "Create", "Coffees") |*@
+@Html.ActionLink("Journal Beer", "Create", "Beers", null, new { @class = "btn btn-success" })
 
 <h2>Connoisseur Info</h2>
 
@@ -26,7 +26,10 @@
 </div>
 
 <hr />
-<p>@Html.ActionLink("View Your Connoisseur Friends", "AllYourFriends", "Authors", null, new { @class = "btn btn-success" })</p>
+<p>
+    @Html.ActionLink("Your Connoisseur Friends", "AllYourFriends", "Authors", null, new { @class = "btn btn-success" })&nbsp;
+    @Html.ActionLink("Pending Requests", "PendingFriends", "Authors", null, new { @class = "btn btn-default" })
+    </p>
 @Html.Action("FriendsList", new { authorId = Model.Id })
 
 @* The difference between @Html.Action and @Html.RenderAction is that the later 'Invokes a child action method and renders the result inline in the parent view.'
@@ -35,6 +38,8 @@
 <p>@Html.ActionLink("Read Your Beer Journal", "YourBeerJournal", "Beers", null, new { @class = "btn btn-success" })</p>
 @Html.Action("BeersList", new { authorId = Model.Id })
 
+@*
 <hr />
 <p>@Html.ActionLink("Read Your Coffee Journal", "CoffeeJournal", "Coffees", null, new { @class = "btn btn-success" })</p>
 @Html.Action("CoffeesList", new { authorId = Model.Id })
+*@

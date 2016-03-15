@@ -15,9 +15,13 @@ namespace TheConnoisseur.Controllers
     {
         private AppDbContext db = new AppDbContext();
 
-        public ActionResult PrivateProfile()
+        public ActionResult PrivateProfile(Author author)
         {
-            return View("PrivateProfile");
+            if (author != null)
+            { 
+                return View("PrivateProfile", author);
+            }
+            return View("Error");
         }
 
         // Author profile page
@@ -38,7 +42,7 @@ namespace TheConnoisseur.Controllers
             // User arrived with invalid parameter
             if (friend == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
             }
             // Your own profile
             if (friend.Id == User.Identity.GetUserId())
@@ -62,7 +66,7 @@ namespace TheConnoisseur.Controllers
         [ChildActionOnly]
         public ActionResult FriendsList(string authorId)
         {
-            // TODO: Ensure Take(5) functions properly
+            // AuthorID2 is you and AuthorID1 is the friend
             var friends = (from a in db.Users
                            join f in db.Friendships on a.Id equals f.AuthorID1
                            where f.AuthorID2 == authorId && f.Relation == true 
@@ -101,14 +105,21 @@ namespace TheConnoisseur.Controllers
         // This view will have a "remove" button added to each profile. Return author and have childaction get list of friend authors, attaching the remove button to each profile
         public ActionResult AllYourFriends()
         {
-            string yourId = User.Identity.GetUserId();
-            var friends = (from a in db.Users
+            // Get currently signed in user and gather their friends Ids from the friendship table, then get the Author objects with that.
+            string yourID = User.Identity.GetUserId();
+            // AuthorID2 is you and AuthorID1 is the friend
+            var friendIds = (from a in db.Users
                            join f in db.Friendships on a.Id equals f.AuthorID1
-                           where f.AuthorID2 == yourId && f.Relation == true
-                           select a).ToList();
-            // All friends should display authors username, state, profile picture, tagline, and favitem along with an "add as friend" button if a relationship doesn't exist.
-            // Author's friends list should include a "remove" button that deletes friend relationship from the database
-            return View(friends);
+                           where f.AuthorID2 == yourID && f.Relation == true
+                           select f.AuthorID1).ToList();
+            List<Author> friends = new List<Author>();
+            foreach (var f in friendIds)
+            {
+                Author a = db.Users.Find(f);
+                friends.Add(a);
+            }
+
+            return View("AllYourFriends", friends);
         }
 
         // Validate friendship, then pass the friend author into the view, use childaction to get list of their friends, use another child action to load add friend button for each author iterated in list.
@@ -118,7 +129,7 @@ namespace TheConnoisseur.Controllers
             // User arrived with invalid parameter
             if (friend == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
             }
             // Public profile
             if (friend.PrivacyType == 1)
@@ -137,11 +148,16 @@ namespace TheConnoisseur.Controllers
         [ChildActionOnly]
         public ActionResult AllTheirFriendsList(string authorID)
         {
-            var friends = (from a in db.Users
-                           join f in db.Friendships on a.Id equals f.AuthorID1
-                           where f.AuthorID2 == authorID && f.Relation == true
-                           select a).ToList();
-
+            // AuthorID2 is 'you' and AuthorID1 is their friend
+            var friendIds = (from f in db.Friendships
+                             where f.AuthorID2 == authorID && f.Relation == true
+                             select f.AuthorID1).ToList();
+            List<Author> friends = new List<Author>();
+            foreach (var f in friendIds)
+            {
+                Author a = db.Users.Find(f);
+                friends.Add(a);
+            }
             return PartialView(friends);
         }
 
@@ -155,11 +171,55 @@ namespace TheConnoisseur.Controllers
                 return null;
             }
             // check if already friends
-            if (!CheckFriendship(friend))
+            if (CheckFriendship(friend) == false)
             {
-                return PartialView(friend);
+                string yourID = User.Identity.GetUserId();
+                // Ensure you haven't already made a request
+                var pending1 = db.FriendshipsPending.Where(p => p.AuthorID1 == friendID && p.AuthorID2 == yourID).FirstOrDefault();
+                
+                if (pending1 == null)
+                {   
+                    // You haven't made a request
+                    // Now ensure they haven't made a request
+                    var pending2 = db.FriendshipsPending.Where(p => p.AuthorID1 == yourID && p.AuthorID2 == friendID).FirstOrDefault();
+                    
+                    if (pending2 == null)
+                    {   
+                        // They haven't made a request
+                        // Display add friend button
+                        return PartialView(friend);
+                    }
+                }
             }
-            // Already friends, don't load friend button
+            // Already friends or pending request, don't load friend button
+            return null;
+        }
+
+        // This Action renders an Accept Friend button on FriendProfile or any other view if there is a pending request
+        [ChildActionOnly]
+        public ActionResult AcceptNewFriendButton(string friendID)
+        {
+            var them = db.Users.Find(friendID);
+            var you = db.Users.Find(User.Identity.GetUserId());
+            // it's you
+            if (them.Id == you.Id)
+            {
+                return null;
+            }
+            // Check if already friends
+            if (CheckFriendship(them) == false)
+            {
+                // Not friends
+                // Check if they they requested friendship
+                var pending = db.FriendshipsPending.Where(p => p.AuthorID1 == you.Id && p.AuthorID2 == them.Id).FirstOrDefault();
+                
+                if (pending != null)
+                {   
+                    // Friendship request exists
+                    return PartialView(them);
+                }
+            }
+            // Already friends or no request, don't load button
             return null;
         }
 
@@ -170,24 +230,89 @@ namespace TheConnoisseur.Controllers
             if (friend != null)
             {
                 // Ensure a request hasn't already been placed.
-                string you = User.Identity.GetUserId();
-                var exists = db.FriendshipsPending.Where(f => (f.AuthorID1 == friend.Id && f.AuthorID2 == you) || (f.AuthorID2 == friend.Id && f.AuthorID1 == you)).FirstOrDefault();
+                string yourId = User.Identity.GetUserId();
+                var exists = db.FriendshipsPending.Where(f => f.AuthorID1 == friend.Id && f.AuthorID2 == yourId).FirstOrDefault();
                 if (exists == null) // Request doesn't exist
                 {
-                    FriendshipPending fp = new FriendshipPending() { AuthorID1 = friend.Id, AuthorID2 = you };
+                    FriendshipPending fp = new FriendshipPending() { AuthorID1 = friend.Id, AuthorID2 = yourId };
                     db.FriendshipsPending.Add(fp);
                     db.SaveChanges();
                     // Request made, send to friend's profile with BefriendResultMessage
                     TempData["BefriendResultMessage"] = "A friend request has been made.";
-                    return RedirectToAction("FriendProfile", friend.Id);// Action not view...
+                    return RedirectToAction("FriendProfile", new { friendID = friend.Id });// Action not view...
                 }
                 // Subsequent request placed, inform user.
                 TempData["BefriendResultMessage"] = "You have already requested a friendship.";
-                return RedirectToAction("FriendProfile", friend.Id);
+                return RedirectToAction("FriendProfile", "Authors", new { friendID = friend.Id });
             }
             // Invalid request.
             return View("Error");
         }
+
+        public ActionResult PendingFriends()
+        {
+            string yourID = User.Identity.GetUserId();
+            // If they requested a friendship then AuthorID1 is them, you are AuthorID2
+            var theirIDs = (from p in db.FriendshipsPending where p.AuthorID1 == yourID select p.AuthorID2).ToList();
+            // Get list of authors from requester Ids list.
+            List<Author> requesters = new List<Author>();
+            foreach (var id in theirIDs)
+            {
+                Author r = db.Users.Find(id);
+                requesters.Add(r);
+            }
+            // Populate PendingFriends view with list of requesting Authors
+            return View(requesters);
+        }
+
+        [HttpPost]
+        public ActionResult AcceptFriend(string friendID)
+        {
+            string yourID = User.Identity.GetUserId();
+            // Gather pending request from database
+            // If they requested a friendship then AuthorID1 is you and AuthorID2 is them
+            var pending = db.FriendshipsPending.Where(p => p.AuthorID1 == yourID && p.AuthorID2 == friendID).FirstOrDefault();
+            if (pending != null)
+            {
+                // Add two Friendship records to database, remove FriendshipPending record
+                Friendship f1 = new Friendship() { AuthorID1 = pending.AuthorID1, AuthorID2 = pending.AuthorID2, Relation = true };
+                Friendship f2 = new Friendship() { AuthorID1 = pending.AuthorID2, AuthorID2 = pending.AuthorID1, Relation = true };
+                db.Friendships.Add(f1);
+                db.Friendships.Add(f2);
+                db.FriendshipsPending.Remove(pending);
+                db.SaveChanges();
+                // Redirect you to PendingFriends action with message
+                string friendUsername = db.Users.Where(u => u.Id == f1.AuthorID2).Select(u => u.UserName).FirstOrDefault();
+                TempData["ResultMessage"] = friendUsername + " is now your connoisseur friend!";
+                return RedirectToAction("PendingFriends");
+            }
+
+            return View("Error");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveFriend(string friendID)
+        {
+            string yourID = User.Identity.GetUserId();
+            // Gather friendship from database
+            var removing1 = db.Friendships.Where(f => f.AuthorID1 == friendID && f.AuthorID2 == yourID && f.Relation == true).FirstOrDefault();
+            if (removing1 != null)
+            {
+                var removing2 = db.Friendships.Where(f => f.AuthorID2 == friendID && f.AuthorID1 == yourID && f.Relation == true).FirstOrDefault();
+                // Remove Friendship record from database
+                db.Friendships.Remove(removing1);
+                db.Friendships.Remove(removing2);
+                db.SaveChanges();
+                // Redirect you to AllYourFriends action with result message
+                string removedUsername = db.Users.Where(u => u.Id == friendID).Select(u => u.UserName).FirstOrDefault();
+                TempData["ResultMessage"] = removedUsername + " has been removed from your friends list.";
+                return RedirectToAction("AllYourFriends");
+            }
+
+            return View("Error");
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {
@@ -203,19 +328,15 @@ namespace TheConnoisseur.Controllers
         {
             // Check friendship table with currently signed in user and requested user
             var you = db.Users.Find(User.Identity.GetUserId());
-            /*
+            // AuthorID2 is you, AuthorID1 is the friend
             var relationship = (from f in db.Friendships
-                                where f.AuthorID1 == friend.Id
-                                && f.AuthorID2 == you.Id
+                                where f.AuthorID1 == friend.Id && f.AuthorID2 == you.Id && f.Relation == true
                                 select f.Relation).FirstOrDefault();
-            */
-            var relationship = (from f in db.Friendships
-                                where (f.AuthorID1 == friend.Id && f.AuthorID2 == you.Id) 
-                                   || (f.AuthorID2 == friend.Id && f.AuthorID1 == you.Id)
-                                select f.Relation).FirstOrDefault();
-
-            // true = friends, false = not friends
-            return relationship;
+            // true = friends, null = not friends
+            if (relationship == true)
+                return true;
+            else
+                return false;
         }
     }
 }

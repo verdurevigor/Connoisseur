@@ -246,6 +246,9 @@
     <Content Include="Views\Authors\AllTheirFriends.cshtml" />
     <Content Include="Views\Authors\AllTheirFriendsList.cshtml" />
     <Content Include="Views\Search\ResultAuthor.cshtml" />
+    <Content Include="Views\Authors\PendingFriends.cshtml" />
+    <Content Include="Views\Authors\PendingFriendsList.cshtml" />
+    <Content Include="Views\Authors\AcceptNewFriendButton.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

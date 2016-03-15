@@ -55,7 +55,7 @@ namespace TheConnoisseur.Controllers
                 return View(friend);
             }
             // Friends Only profile and not friends
-            return RedirectToAction("PrivateProfile", "Authors");
+            return RedirectToAction("PrivateProfile", "Authors", new { author = friend });
         }
 
         [ChildActionOnly]
@@ -64,8 +64,6 @@ namespace TheConnoisseur.Controllers
             var beers = db.Beers.Include("Journal").Where(b => b.Journal.Author.Id == friendID).ToList();
             return PartialView(beers);
         }
-
-
 
         [ChildActionOnly]
         public ActionResult FriendsBeers(string friendId)
@@ -222,13 +220,15 @@ namespace TheConnoisseur.Controllers
         {
             // Check friendship table with currently signed in user and requested user
             var you = db.Users.Find(User.Identity.GetUserId());
-
+            // AuthorID2 is you, AuthorID1 is the friend
             var relationship = (from f in db.Friendships
-                                where f.AuthorID1 == friend.Id
-                                && f.AuthorID2 == you.Id
+                                where f.AuthorID1 == friend.Id && f.AuthorID2 == you.Id && f.Relation == true
                                 select f.Relation).FirstOrDefault();
-            // true = friends, false = not friends
-            return relationship;
+            // true = friends, null = not friends
+            if (relationship == true)
+                return true;
+            else
+                return false;
         }
 
         // Returns true if Journal object was created by currently signed in user

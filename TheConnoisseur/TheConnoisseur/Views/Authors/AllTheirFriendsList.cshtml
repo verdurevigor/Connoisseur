@@ -28,6 +28,7 @@
                         <br />
                         <br />
                         @Html.Action("AddNewFriendButton", new { friendID = item.Id })
+                        @Html.Action("AcceptNewFriendButton", "Authors", new { friendID = item.Id })
                     </div>
                 </div>
             </div>

@@ -5,40 +5,55 @@
 }
 <h2>Your Connoisseur Friends</h2>
 <hr />
-<span class="h4 text-danger">@ViewBag.ResultMessage</span>
+<span class="h4 text-danger">@ViewBag.ResultMessage</span>@* TODO: Replace this ViewBag result message with a TempData result message *@
+<h4>@TempData["ResultMessage"]</h4>
+@Html.ActionLink("Pending Requests", "PendingFriends", "Authors", null, new { @class = "btn btn-default" })
+<br />
+<br />
 
-<div class="row">
-
-@foreach (var item in Model)
+@if (Model.Count() == 0)
 {
-    <div class="col-md-4 col-sm-6">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="pull-left col-sm-6">
-                    <img src="@item.AvatarPath" alt="Author Avatar" />
-                    <br />
-                    <br />
-                    @item.FirstName @item.LastName
-                    <br />
-                    AKA: @Html.ActionLink(item.UserName, "FriendProfile", new { friendID = item.Id })
-                </div>
-                <div class="pull-left col-sm-6">
-                    @item.City, @item.State
-                    <br />
-                    <b>Current Favorite:</b>
-                    <br />
-                    @item.FavItem
-                    <hr />
-                    "@item.Tagline"
-                    <br />
-                    <br />
-                    <br />@* Use delete button like in Authorization delete, instead of the one below.
-    @Html.ActionLink("Denounce Friendship", "DeleteFriend", new { friendID = item.Id }, new { @class = "btn btn-sm btn-warning" })*@
+    <h4>Currently, you have no connoisseur friends. Maybe you're too picky...?</h4>
+}
+else
+{
+
+    <div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left col-sm-6">
+                        <img src="@item.AvatarPath" alt="Author Avatar" />
+                        <br />
+                        <br />
+                        @item.FirstName @item.LastName
+                        <br />
+                        AKA: @Html.ActionLink(item.UserName, "FriendProfile", new { friendID = item.Id })
+                    </div>
+                    <div class="pull-left col-sm-6">
+                        @item.City, @item.State
+                        <br />
+                        <b>Current Favorite:</b>
+                        <br />
+                        @item.FavItem
+                        <hr />
+                        "@item.Tagline"
+                        <br />
+                        <br />
+                        @using (Html.BeginForm("RemoveFriend", "Authors", FormMethod.Post))
+                        {
+                            <input type="hidden" name="friendID" value="@item.Id" />
+                            <button type="submit" class="btn btn-warning">Remove Friend</button>
+                        }</div>
                 </div>
             </div>
         </div>
+
+    }
+
     </div>
 
 }
-
-</div>

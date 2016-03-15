@@ -15,7 +15,9 @@ namespace TheConnoisseur.Controllers
         // Types of searches available
         private List<string> types = new List<string>()
         {
-            "Coffee", "Beer", "Author"
+            //"Coffee", 
+            "Beer", 
+            "Author"
         };
 
         // GET: Search
