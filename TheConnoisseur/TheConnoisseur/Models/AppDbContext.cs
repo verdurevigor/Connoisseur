@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using TheConnoisseur.Models;
+using TheConnoisseur.Migrations;
 
 namespace TheConnoisseur.Models
 {
@@ -10,6 +13,7 @@ namespace TheConnoisseur.Models
     {
         public AppDbContext() : base("DefaultConnection")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
         }
 
         public System.Data.Entity.DbSet<TheConnoisseur.Models.Journal> Journals { get; set; }

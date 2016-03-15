@@ -17,12 +17,12 @@ namespace TheConnoisseur
             // No longer used; Migration is implemented.
             // When application is started, each time recreate the database. It is populated with mock data in the ConnoisseurDbInitializer class
             //Database.SetInitializer(new TheConnoisseurDbInitializer());
-
-
+            
             AreaRegistration.RegisterAllAreas();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        
         }
     }
 }

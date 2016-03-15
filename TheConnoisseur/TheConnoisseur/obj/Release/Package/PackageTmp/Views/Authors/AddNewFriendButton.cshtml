@@ -1,0 +1,7 @@
+﻿@model TheConnoisseur.Models.Author
+
+@if(Model != null)
+{
+    @Html.ActionLink("Befriend Connoisseur", "RequestFriendship", new { friendID = Model.Id }, new { @class = "btn btn-default" })
+}
+@* TODO: Make action for RequestFriendship and add table in db for pending. Test to make sure this whole string of events for an add friend button works.*@

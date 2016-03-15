@@ -1,0 +1,53 @@
+﻿@model TheConnoisseur.Models.Coffee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Coffee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        @Html.HiddenFor(model => model.Journal.JournalID)
+
+        @Html.HiddenFor(model => model.CoffeeID)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoastType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoastType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Origin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Origin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodPairing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoodPairing)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

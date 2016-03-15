@@ -1,0 +1,18 @@
+﻿@model TheConnoisseur.Models.Author
+
+@{
+    ViewBag.Title = "Private Profile";
+}
+
+<h2>Private Profile</h2>
+
+@if(Model.PrivacyType == 2)
+{
+    <p>This user has a private profile.</p>
+}
+else
+{
+    <p>@Model.UserName has a profile viewable by friends only.</p>
+    @Html.Action("AddNewFriendButton", "Authors", new { friendID = Model.Id })
+    @Html.Action("AcceptNewFriendButton", "Authors", new { friendID = Model.Id })
+}

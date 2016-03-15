@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TheConnoisseur.Models.Author>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left col-sm-6">
+                        <img src="@item.AvatarPath" alt="Author Avatar" />
+                        <br />
+                        <br />
+                        @item.FirstName @item.LastName
+                        <br />
+                        AKA: @Html.ActionLink(item.UserName, "FriendProfile", new { friendID = item.Id })
+                    </div>
+                    <div class="pull-left col-sm-6">
+                        @item.City, @item.State
+                        <br />
+                        <b>Current Favorite:</b>
+                        <br />
+                        @item.FavItem
+                        <hr />
+                        "@item.Tagline"
+                        <br />
+                        <br />
+                        @Html.BeginForm("AcceptFriend", "Authors", "POST")
+                        {
+                            <input type="hidden" name="friendID" value="@item.Id" />
+                            <button type="submit" class="btn btn-block btn-success">Confirm</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>

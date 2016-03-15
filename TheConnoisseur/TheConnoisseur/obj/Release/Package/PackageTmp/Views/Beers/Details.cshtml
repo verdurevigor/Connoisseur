@@ -1,0 +1,50 @@
+﻿@model TheConnoisseur.Models.Beer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Beer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Journal.JournalID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Journal.JournalID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Abv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Abv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ibu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ibu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Seasonal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seasonal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BeerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

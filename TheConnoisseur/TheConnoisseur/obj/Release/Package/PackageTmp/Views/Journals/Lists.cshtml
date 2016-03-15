@@ -1,0 +1,14 @@
+﻿@model IEnumerable<TheConnoisseur.Models.Journal>
+
+@{
+    ViewBag.Title = "Lists";
+}
+
+<h2>The Connoisseur Lists</h2>
+
+<hr />
+
+@Html.Action("HighestBeerList")
+
+
+@Html.Action("LowestBeerList")

@@ -30,7 +30,7 @@ namespace TheConnoisseur.Migrations
                 new UserStore<Author>(
                     new AppDbContext()));
 
-            /*
+            
             // If the Members and Role have been successfully added. Than the Authors being used in the Journal entries should be pulled from the database explicitly below the commented section.
             // Create Authors and add them to database
             Author admin = new Author()
@@ -146,14 +146,14 @@ namespace TheConnoisseur.Migrations
             userManager.AddToRole(aid, "Admin");
             userManager.AddToRole(mid, "Moderator");
             context.SaveChanges();                  // TODO: Investigate why context.SaveChanges() is used when db.SaveChanges() and userManager are used here.
-            */
             
+            /*
             // This section of Author querying is only for use if the Users have been created but the Journal or Friendship has not.
             var a1 = (from a in context.Users where a.UserName == "Brodster" select a).FirstOrDefault();
             var a2 = (from a in context.Users where a.UserName == "PhilosophicalDrinker" select a).FirstOrDefault();
             var a3 = (from a in context.Users where a.UserName == "Flowerchild" select a).FirstOrDefault();
+            */
             
-            /*
             // Only complete this part once: Completed
             // Only Perform this code block once!
             // Generate friend relationships and one blocked relationship
@@ -170,7 +170,7 @@ namespace TheConnoisseur.Migrations
             context.Friendships.Add(f3a);
             context.Friendships.Add(f3b);
             SaveChanges(context);
-            */
+            
 
 
             // Generate Journals (with Author), then Subtype (coffee, beer) and set the Journal into the Subtype before saving.

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TheConnoisseur.Models.Beer>
+
+@{
+    ViewBag.Title = "Your Beer Journals";
+}
+@* ResultMessage is used to display delete or edit result message *@
+<span class="text-danger h4">@TempData["ResultMessage"]</span>
+<h2>Your Beer Journal</h2>
+
+
+<p>
+    @Html.ActionLink("Journal another beer!", "Create", "", new { @class = "btn btn-success" })
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        @* Anchor from "Read" link on profile *@
+        <a href="#@item.BeerID" role="tab" data-toggle="tab"></a>  @* TODO: make anchor function *@
+        
+        <div class="col-md-6 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left col-sm-6">
+                        <img src="@item.Journal.ImagePath" alt="Beer Icon" />
+                        <br />
+                        <b>@item.Journal.Title</b>
+                        by @item.Journal.Maker
+                        <br />
+                        Consumed at: @item.Journal.Location
+                        <br />
+                        On: @item.Journal.Date
+                    </div>
+                    <div class="pull-left col-sm-6">
+                        <b>Rating:</b> @item.Journal.Rating
+                        <br />
+                        <b>ABV:</b> @item.Abv&nbsp;<b>IBU:</b>&nbsp;@item.Ibu
+                        <br />
+                        <b>Style: </b>@item.Style
+                        @if (item.Seasonal != null)
+                        {
+                            <p>Season:  @Html.DisplayFor(model => item.Seasonal)</p>
+                        }
+                        <br />
+                        @item.Journal.Description
+                        <br />
+                        @Html.ActionLink("Edit", "Edit", new { beerID = item.BeerID }, new { @class = "btn btn-default" })
+                        <span onclick="return confirm('Delete journal entry for @item.Journal.Title?')">
+                            @Html.ActionLink("Delete", "Delete", new { journalID = item.Journal.JournalID }, new { @class = "btn btn-danger" })
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

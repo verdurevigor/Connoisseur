@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TheConnoisseur.Models.Coffee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Journal.JournalId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoastType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Origin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodPairing)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Journal.JournalID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoastType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Origin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FoodPairing)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Journal.JournalID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Journal.JournalID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Journal.JournalID })
+        </td>
+    </tr>
+}
+
+</table>

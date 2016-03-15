@@ -8,6 +8,7 @@ namespace TheConnoisseur.Controllers
 {
     // Public facing views do not need to have access to the currently logged in User
     // Therefore, the controller inherits from Controller
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -17,13 +18,6 @@ namespace TheConnoisseur.Controllers
 
         public ActionResult Maps()
         {
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

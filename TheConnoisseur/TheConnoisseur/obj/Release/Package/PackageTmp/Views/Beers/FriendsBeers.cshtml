@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TheConnoisseur.Models.Beer>
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        @* Anchor from "Read" link on profile *@
+        <a href="#@item.BeerID" role="tab" data-toggle="tab"></a>  @* TODO: make anchor function *@
+
+        <div class="col-md-6 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left col-sm-6">
+                        <img src="@item.Journal.ImagePath" alt="Beer Icon" />
+                        <br />
+                        <b>@item.Journal.Title</b>
+                        by @item.Journal.Maker
+                        <br />
+                        Consumed at: @item.Journal.Location
+                        <br />
+                        On: @item.Journal.Date
+                    </div>
+                    <div class="pull-left col-sm-6">
+                        <b>Rating:</b> @item.Journal.Rating
+                        <br />
+                        <b>ABV:</b> @item.Abv&nbsp;<b>IBU:</b>&nbsp;@item.Ibu
+                        <br />
+                        <b>Style: </b>@item.Style
+                        @if (item.Seasonal != null)
+                        {
+                            <p>Season:  @Html.DisplayFor(model => item.Seasonal)</p>
+                        }
+                        <br />
+                        @item.Journal.Description
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
