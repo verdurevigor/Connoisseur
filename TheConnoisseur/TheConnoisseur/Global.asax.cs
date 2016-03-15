@@ -24,7 +24,7 @@ namespace TheConnoisseur
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
         
         }
     }

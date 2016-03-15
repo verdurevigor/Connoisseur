@@ -22,7 +22,7 @@ namespace TheConnoisseur.Models
         public string Password { get; set; }
         [Compare("Password")]   
         [DataType(DataType.Password)]
-        [Display(Name = "Privacy Type")]
+        [Display(Name = "Confirm Password")]
         [Required]
         public string PasswordConfirmed { get; set; }
         [StringLength(30, ErrorMessage = "We will only store 30 characters of that city's name.")]
@@ -30,7 +30,6 @@ namespace TheConnoisseur.Models
         [StringLength(2, ErrorMessage = "State must be a two letter abbreviation.")]
         public virtual string State { get; set; }
         [Display(Name="Privacy Level")]
-        [Range(1,3)]
         public int PrivacyType { get; set; }
     }
 }

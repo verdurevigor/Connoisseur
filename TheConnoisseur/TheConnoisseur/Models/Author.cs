@@ -27,7 +27,6 @@ namespace TheConnoisseur.Models
         [StringLength(50, ErrorMessage = "A tagline is at most 50 characters. One must be concise and broad.")]
         public string Tagline { get; set; }
         [Display(Name = "Privacy Level")]
-        [Range(1, 3)]
         public int PrivacyType { get; set; }
         public string AvatarPath { get; set; }
         [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}")]

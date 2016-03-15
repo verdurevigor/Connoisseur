@@ -20,7 +20,6 @@ namespace TheConnoisseur.Models
         public string ImagePath { get; set; }
         // Range of 1-5, not implementing annotation due to radio buttons lack of ability to hold the value of an int...
         [Required]
-        [Range(1,5)]
         public int Rating { get; set; }
         [Required]
         [StringLength(1000, ErrorMessage = "While this is a journal, you get one 'page' for each entry. Please write less than 1000 characters")]
